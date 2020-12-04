@@ -1,0 +1,106 @@
+locals {
+  domain = "couchbase.com"
+
+  jenkins_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/jenkins:lts"
+
+  # server.jenkins.couchbase.com
+  server_cpu       = 2048
+  server_memory    = 4096
+  server_ui_port   = 8080
+  server_jnlp_port = 50002
+
+  # server.jenkins.couchbase.com
+  cv_cpu       = 2048
+  cv_memory    = 4096
+  cv_ui_port   = 8080
+  cv_jnlp_port = 50002
+
+  # jenkins workers
+  worker_cpu    = 4096
+  worker_memory = 7168
+}
+
+module "server_jenkins" {
+  source  = "./services/jenkins"
+  stopped = local.stopped
+  lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
+  prefix  = local.name
+
+  ui_port       = local.server_ui_port
+  jnlp_port     = local.server_jnlp_port
+  hostname      = "server"
+  subdomain     = "build"
+  image         = local.jenkins_image
+  master_cpu    = local.server_cpu
+  master_memory = local.server_memory
+  context       = "EC2"
+
+  efs_security_group = aws_security_group.efs
+
+  domain              = local.domain
+  dns_namespace       = aws_service_discovery_private_dns_namespace.main
+  worker_cpu          = local.worker_cpu
+  worker_memory       = local.worker_memory
+  vpc_id              = module.vpc.vpc_id
+  ecs_cluster         = aws_ecs_cluster.main
+  private_key         = tls_private_key.main
+  public_subnets      = module.vpc.public_subnets
+  private_subnets     = module.vpc.private_subnets
+  ecs_task_runner_arn = aws_iam_policy.ecs_task_runner.arn
+  efs_file_system     = aws_efs_file_system.main
+  ecs_execution_role  = aws_iam_role.ec2_ecs
+  ecs_role            = aws_iam_role.ecs
+  profiledata_key     = module.profiledata.key
+  region              = local.region
+
+  images = {
+    "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:latest"
+    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:latest"
+    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:latest"
+    "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:latest"
+    "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:latest"
+    "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:latest"
+    "suse15"   = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:latest"
+    "ubuntu16" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:latest"
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
+    "ubuntu20" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:latest"
+  }
+}
+
+module "cv_jenkins" {
+  source  = "./services/jenkins"
+  stopped = local.stopped
+  lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
+  prefix  = local.name
+
+  ui_port       = local.cv_ui_port
+  jnlp_port     = local.cv_jnlp_port
+  hostname      = "cv"
+  subdomain     = "build"
+  image         = local.jenkins_image
+  master_cpu    = local.cv_cpu
+  master_memory = local.cv_memory
+  context       = "EC2"
+
+  efs_security_group = aws_security_group.efs
+
+  domain              = local.domain
+  dns_namespace       = aws_service_discovery_private_dns_namespace.main
+  worker_cpu          = local.worker_cpu
+  worker_memory       = local.worker_memory
+  vpc_id              = module.vpc.vpc_id
+  ecs_cluster         = aws_ecs_cluster.main
+  private_key         = tls_private_key.main
+  public_subnets      = module.vpc.public_subnets
+  private_subnets     = module.vpc.private_subnets
+  ecs_task_runner_arn = aws_iam_policy.ecs_task_runner.arn
+  efs_file_system     = aws_efs_file_system.main
+  ecs_execution_role  = aws_iam_role.ec2_ecs
+  ecs_role            = aws_iam_role.ecs
+  profiledata_key     = module.profiledata.key
+  region              = local.region
+
+  images = {
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
+  }
+}

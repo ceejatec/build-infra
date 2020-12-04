@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker build . -t 284614897128.dkr.ecr.us-east-1.amazonaws.com/latestbuilds
