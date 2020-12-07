@@ -18,6 +18,11 @@
           "sourceVolume": "latestbuilds",
           "containerPath": "/usr/share/nginx/html",
           "readOnly": true
+      },
+      {
+          "sourceVolume": "latestbuilds",
+          "containerPath": "/data",
+          "readOnly": false
       }
     ],
     "logConfiguration": {

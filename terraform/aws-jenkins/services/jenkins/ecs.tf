@@ -46,7 +46,6 @@ resource "time_sleep" "wait_10_seconds" {
 
 resource "aws_ecs_service" "jenkins_master" {
   depends_on = [time_sleep.wait_10_seconds]
-  count = var.stopped ? 0 : 1
   # LATEST isn't most recent, need to specify platform_version to mount EFS on Fargate
   # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
   platform_version = var.context == "EC2" ? "" : "1.4.0"
@@ -54,7 +53,7 @@ resource "aws_ecs_service" "jenkins_master" {
   cluster          = var.ecs_cluster.id
   task_definition  = aws_ecs_task_definition.jenkins_master.arn
   launch_type      = var.context
-  # desired_count    = var.stopped ? 0 : 1
+  desired_count    = var.stopped ? 0 : 1
 
   service_registries {
     registry_arn = aws_service_discovery_service.jenkins_master.arn

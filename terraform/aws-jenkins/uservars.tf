@@ -1,7 +1,7 @@
 locals {
-  stopped         = true  # if true, does not bring up any instances
+  stopped         = false  # if true, does not bring up any instances
   bastion_enabled = true # enable to create a bastion instance with ssh access for your IP
-  lbs_stopped      = true # be warned - it'll get a new fqdn when it restarts
+  lbs_stopped      = false # be warned - it'll get a new fqdn when it restarts
 
   ## if stopped = false, you can halt individual components by toggling these on
   # note: I don't know how much of this still works
@@ -31,7 +31,7 @@ locals {
   latestbuilds_context   = "EC2"
   latestbuilds_name      = "latestbuilds" #cnt-s231.sc - /data/builds/latestbuilds (also /data/buildteam as buildteam and /data/builds/releases as releases)
   latestbuilds_subdomain = "service"
-  latestbuilds_image     = "nginx:alpine"
+  latestbuilds_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/latestbuilds"
   latestbuilds_cpu       = 1024
   latestbuilds_memory    = 2048
 

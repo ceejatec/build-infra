@@ -17,3 +17,7 @@ data "http" "ifconfig" {
 output "add_yourself_to_load_balancer_and_bastion_security_groups" {
   value = "${trim(data.http.ifconfig.body, "\n")}/32"
 }
+
+output "jenkins_ecs_config" {
+  value = module.server_jenkins.cloud_config
+}
