@@ -1,15 +1,8 @@
 locals {
-  stopped         = false  # if true, does not bring up any instances
-  bastion_enabled = true # enable to create a bastion instance with ssh access for your IP
-  lbs_stopped      = false # be warned - it'll get a new fqdn when it restarts
-
-  ## if stopped = false, you can halt individual components by toggling these on
-  # note: I don't know how much of this still works
-  latestbuilds_stopped   = false
-  profiledata_stopped    = false
-  go_proxy_stopped       = false
-  jenkins_master_stopped = false
-  asg_stopped            = false
+  stopped         = false # if true, does not bring up any instances
+  bastion_enabled = true  # enable to create a bastion instance with ssh access for your IP
+  lbs_stopped     = true  # don't change this after going live, or we'll need dns updates as lb fqdns will change
+  jenkins_stopped = true  # stops all jenkins masters
 
   ssh_key_path = "/tmp/aws-migration.pem" # key will be saved here on `terraform apply` if the file doesn't exist
 

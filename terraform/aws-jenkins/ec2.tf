@@ -61,8 +61,8 @@ resource "aws_launch_configuration" "master" {
 # Our ECS managed autoscaling group
 resource "aws_autoscaling_group" "master" {
   name     = "${local.name}-${aws_launch_configuration.master.name}"
-  max_size = local.stopped || local.asg_stopped ? 0 : local.ec2_max_instances
-  min_size = local.stopped || local.asg_stopped ? 0 : 1
+  max_size = local.stopped ? 0 : local.ec2_max_instances
+  min_size = local.stopped ? 0 : 1
 
   # availability_zones = [data.aws_availability_zones.available.names[1]]
   default_cooldown = 120

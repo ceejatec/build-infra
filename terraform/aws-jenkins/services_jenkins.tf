@@ -22,7 +22,7 @@ locals {
 
 module "server_jenkins" {
   source  = "./services/jenkins"
-  stopped = local.stopped
+  stopped = local.stopped || local.jenkins_stopped
   lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
   prefix  = local.name
 
@@ -69,7 +69,7 @@ module "server_jenkins" {
 
 module "cv_jenkins" {
   source  = "./services/jenkins"
-  stopped = true
+  stopped = true #local.stopped || local.jenkins_stopped
   lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
   prefix  = local.name
 
