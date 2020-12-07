@@ -29,6 +29,7 @@ resource "aws_iam_policy" "profiledata_ssm" {
       {
         "Effect": "Allow",
         "Action": [
+          "ssm:GetParameter",
           "ssm:GetParameters",
           "secretsmanager:GetSecretValue"
         ],

@@ -19,6 +19,7 @@
                "ec2:DescribeSpotPriceHistory",
                "ec2:DescribeImages",
                "ec2:CancelSpotInstanceRequests",
+               "ec2:GetPasswordData",
                "iam:PassRole",
                "ec2:StartInstances",
                "ec2:DescribeAvailabilityZones",

@@ -5,9 +5,9 @@ resource "aws_efs_file_system_policy" "main" {
     server_jenkins_access_point_arn = module.server_jenkins.efs_access_point.arn
     cv_jenkins_access_point_arn     = module.cv_jenkins.efs_access_point.arn
     latestbuilds_access_point_arn   = module.latestbuilds.efs_access_point.arn
-    server_jenkins_principals       = "[\"${module.bastion.iam_role.arn}\",\"${module.server_jenkins.master_iam_role.arn}\"]"
-    cv_jenkins_principals           = "[\"${module.cv_jenkins.master_iam_role.arn}\",\"${module.cv_jenkins.master_iam_role.arn}\"]"
-    latestbuilds_principals         = "[\"${module.bastion.iam_role.arn}\", \"${module.latestbuilds.iam_role.arn}\"]"
+    server_jenkins_principals       = "[\"${module.server_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+    cv_jenkins_principals           = "[\"${module.cv_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+    latestbuilds_principals         = "[\"${module.latestbuilds.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
   })
 }
 
@@ -77,6 +77,7 @@ module "latestbuilds" {
   dns_namespace               = aws_service_discovery_private_dns_namespace.main
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
   ecs_cluster                 = aws_ecs_cluster.main
+  bastion_security_group      = module.bastion.security_group
 }
 
 module "profiledata" {

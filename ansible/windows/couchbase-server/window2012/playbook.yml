@@ -150,9 +150,9 @@
         dest: "C:\\Program Files (x86)\\Common Files\\Merge Modules\\{{ item.filename }}"
         force: no
       with_items:
-        - url: http://downloads.build.couchbase.com/winbits/Microsoft_VC100_CRT_x64.msm
+        - url: http://latestbuilds.service.couchbase.com/buildteam/downloads/winbits/Microsoft_VC100_CRT_x64.msm
           filename: Microsoft_VC100_CRT_x64.msm
-        - url: http://downloads.build.couchbase.com/winbits/Microsoft_VC120_CRT_x64.msm
+        - url: http://latestbuilds.service.couchbase.com/buildteam/downloads/winbits/Microsoft_VC120_CRT_x64.msm
           filename: Microsoft_VC120_CRT_x64.msm
 
 # Do OpenSSH last so the service has the latest version of the path
@@ -177,6 +177,14 @@
         action: allow
         direction: in
         protocol: TCP
+
+    - name: Install aws cli
+      win_chocolatey:
+        name: awscli
+        state: latest
+      tags:
+      - never
+      - aws
 
     - name: Configure profile synchronization
       include_role:

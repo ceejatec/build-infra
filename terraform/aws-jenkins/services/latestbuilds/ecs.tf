@@ -7,7 +7,7 @@ resource "aws_ecs_service" "latestbuilds" {
   desired_count    = var.stopped ? 0 : 1
 
   service_registries {
-    registry_arn = aws_service_discovery_service.latestbuilds.arn
+      registry_arn = aws_service_discovery_service.latestbuilds.arn
   }
 
   network_configuration {

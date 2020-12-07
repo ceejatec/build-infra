@@ -25,6 +25,11 @@ resource "aws_iam_role_policy_attachment" "ec2_plugin" {
   policy_arn = aws_iam_policy.ec2_plugin.arn
 }
 
+resource "aws_iam_role_policy_attachment" "ec2_plugin_ssm" {
+  role = aws_iam_role.ec2_plugin.name
+  policy_arn = aws_iam_policy.worker_ssm.arn
+}
+
 resource "aws_iam_instance_profile" "ec2_plugin_worker" {
   name = "${var.prefix}-${var.hostname}-ec2-plugin-worker"
   role = aws_iam_role.ec2_plugin.name

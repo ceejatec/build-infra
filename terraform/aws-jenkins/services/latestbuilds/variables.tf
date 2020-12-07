@@ -16,3 +16,4 @@ variable "dns_namespace" {}
 variable "context" {}
 variable "stopped" {}
 variable "efs_security_group" {}
+variable "bastion_security_group" {}
