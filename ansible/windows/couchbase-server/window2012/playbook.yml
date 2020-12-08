@@ -3,8 +3,6 @@
 
   vars:
     kbs:
-      - guid: 2/5/6/256CCCFB-5341-4A8D-A277-8A81B21A1E35
-        filename: clearcompressionflag.exe
       - guid: D/6/0/D60ED3E0-93A5-4505-8F6A-8D0A5DA16C8A
         filename: Windows8.1-KB2919442-x64.msu
       - guid: 2/5/6/256CCCFB-5341-4A8D-A277-8A81B21A1E35
@@ -115,11 +113,11 @@
     - name: Add tools to PATH.
       include: extend-path.yml
       with_items:
-        - C:\bin
-        - C:\Program Files\CMake\bin
-        - C:\Program Files\git\cmd
-        - C:\Program Files\NASM
-        - C:\Program Files (x86)\WiX Toolset v3.11\bin
+        - "C:\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Program Files\\git\\cmd"
+        - "C:\\Program Files\\NASM"
+        - "C:\\Program Files (x86)\\WiX Toolset v3.11\\bin"
 
 # Next steps are all about installing Visual Studio
 
@@ -143,6 +141,11 @@
       win_reboot:
         reboot_timeout_sec: 3600
       when: '"reboot is necessary" in choco_output.stdout'
+
+    - name: Ensure merge modules directory is present
+      win_file:
+        path: "C:\\Program Files (x86)\\Common Files\\Merge Modules"
+        state: directory
 
     - name: Download older VS CRT Merge Modules
       win_get_url:
