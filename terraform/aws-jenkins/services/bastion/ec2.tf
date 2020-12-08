@@ -12,7 +12,6 @@ data "aws_ami" "amzn2" {
     values = ["x86_64"]
   }
 }
-
 resource "aws_instance" "bastion" {
   count = var.stopped ? 0 : 1
   #   depends_on    = [tls_private_key.main, aws_efs_mount_target.main, aws_efs_access_point.jenkins_home, aws_ecs_cluster.main]
@@ -21,10 +20,11 @@ resource "aws_instance" "bastion" {
   subnet_id     = var.public_subnets[0]
   key_name      = "${var.prefix}-robot"
   user_data = templatefile("${path.module}/files/userdata/bastion_userinit.tpl", {
-    server_jenkins_accesspoint      = var.server_jenkins_access_point.id
-    cv_jenkins_accesspoint      = var.cv_jenkins_access_point.id
-    latestbuilds_accesspoint = var.latestbuilds_access_point.id
-    filesystem               = var.efs_file_system.id
+    analytics_jenkins_accesspoint = var.analytics_jenkins_access_point.id
+    cv_jenkins_accesspoint        = var.cv_jenkins_access_point.id
+    server_jenkins_accesspoint    = var.server_jenkins_access_point.id
+    latestbuilds_accesspoint      = var.latestbuilds_access_point.id
+    filesystem                    = var.efs_file_system.id
   })
   iam_instance_profile = aws_iam_instance_profile.bastion.id
   vpc_security_group_ids = [

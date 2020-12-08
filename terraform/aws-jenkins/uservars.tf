@@ -1,8 +1,8 @@
 locals {
   stopped         = false # if true, does not bring up any instances
   bastion_enabled = true  # enable to create a bastion instance with ssh access for your IP
-  lbs_stopped     = true  # don't change this after going live, or we'll need dns updates as lb fqdns will change
-  jenkins_stopped = true  # stops all jenkins masters
+  lbs_stopped     = false  # don't change this after going live, or we'll need dns updates as lb fqdns will change
+  jenkins_stopped = false  # stops all jenkins masters
 
   ssh_key_path = "/tmp/aws-migration.pem" # key will be saved here on `terraform apply` if the file doesn't exist
 

@@ -15,26 +15,14 @@ output "master_iam_role" {
 }
 
 
-output "cloud_config" {
-  value = templatefile("${path.module}/files/config/clouds.tpl", {
-    cloud_name            = var.ecs_cluster.name
-    task_prefix           = var.prefix
-    cluster_arn           = var.ecs_cluster.arn
-    region                = var.region
-    jenkins_tunnel        = "${local.fqdn}:${var.jnlp_port}"
-    jenkins_url           = "http://${local.fqdn}:8080"
-    execution_role        = var.ecs_execution_role.arn
-    security_groups       = aws_security_group.jenkins_worker.id
-    subnets               = join(",", var.private_subnets)
-    cloudwatch_log_group  = aws_cloudwatch_log_group.jenkins_workers.name
-    cloudwatch_log_prefix = "worker"
-  })
-}
-
 output "master_security_group" {
   value = aws_security_group.jenkins_master
 }
 
 output "worker_security_group" {
   value = aws_security_group.jenkins_worker
+}
+
+output "cloud_config_path" {
+  value = "/tmp/${var.prefix}-${var.hostname}.cloudconfig"
 }

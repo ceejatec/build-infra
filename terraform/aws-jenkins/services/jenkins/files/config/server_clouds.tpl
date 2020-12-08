@@ -1,5 +1,3 @@
-  
-  <clouds>
     <com.cloudbees.jenkins.plugins.amazonecs.ECSCloud plugin="amazon-ecs@1.37">
       <name>${cloud_name}</name>
       <templates>
@@ -402,4 +400,3 @@
       <maxMemory>0</maxMemory>
       <maxMemoryReservation>0</maxMemoryReservation>
     </com.cloudbees.jenkins.plugins.amazonecs.ECSCloud>
-  </clouds>

@@ -1,13 +1,19 @@
 resource "aws_efs_file_system_policy" "main" {
   file_system_id = aws_efs_file_system.main.id
   policy = templatefile("files/policies/efs_access.tpl", {
-    filesystem_arn                  = aws_efs_file_system.main.arn
-    server_jenkins_access_point_arn = module.server_jenkins.efs_access_point.arn
-    cv_jenkins_access_point_arn     = module.cv_jenkins.efs_access_point.arn
-    latestbuilds_access_point_arn   = module.latestbuilds.efs_access_point.arn
-    server_jenkins_principals       = "[\"${module.server_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
-    cv_jenkins_principals           = "[\"${module.cv_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
-    latestbuilds_principals         = "[\"${module.latestbuilds.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+    filesystem_arn                     = aws_efs_file_system.main.arn
+
+    analytics_jenkins_access_point_arn = module.analytics_jenkins.efs_access_point.arn
+    analytics_jenkins_principals       = "[\"${module.analytics_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+
+    cv_jenkins_access_point_arn        = module.cv_jenkins.efs_access_point.arn
+    cv_jenkins_principals              = "[\"${module.cv_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+
+    server_jenkins_access_point_arn    = module.server_jenkins.efs_access_point.arn
+    server_jenkins_principals          = "[\"${module.server_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+
+    latestbuilds_access_point_arn      = module.latestbuilds.efs_access_point.arn
+    latestbuilds_principals            = "[\"${module.latestbuilds.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
   })
 }
 
@@ -21,14 +27,21 @@ module "bastion" {
 
   instance_type                 = local.bastion_instance_type
   public_subnets                = module.vpc.public_subnets
-  server_jenkins_access_point   = module.server_jenkins.efs_access_point
+  latestbuilds_access_point     = module.latestbuilds.efs_access_point
+
+  analytics_jenkins_access_point       = module.analytics_jenkins.efs_access_point
+  analytics_jenkins_security_group     = module.analytics_jenkins.master_security_group
+  analytics_jenkins_iam_policy         = module.analytics_jenkins.master_iam_policy
+
   cv_jenkins_access_point       = module.cv_jenkins.efs_access_point
   cv_jenkins_security_group     = module.cv_jenkins.master_security_group
   cv_jenkins_iam_policy         = module.cv_jenkins.master_iam_policy
-  latestbuilds_access_point     = module.latestbuilds.efs_access_point
-  efs_file_system               = aws_efs_file_system.main
+
+  server_jenkins_access_point   = module.server_jenkins.efs_access_point
   server_jenkins_security_group = module.server_jenkins.master_security_group
   server_jenkins_iam_policy     = module.server_jenkins.master_iam_policy
+
+  efs_file_system               = aws_efs_file_system.main
   ssh_key_path                  = local.ssh_key_path
 }
 
