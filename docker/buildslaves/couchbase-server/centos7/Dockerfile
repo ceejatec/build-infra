@@ -127,7 +127,8 @@ RUN curl --create-dirs -fsSLo /usr/share/jenkins/agent.jar https://repo.jenkins-
   && ln -sf /usr/share/jenkins/agent.jar /usr/share/jenkins/slave.jar
 
 ENV AGENT_WORKDIR=/home/couchbase/agent
-RUN mkdir /home/couchbase/.jenkins && mkdir -p ${AGENT_WORKDIR}
+RUN mkdir /home/couchbase/.jenkins && mkdir -p ${AGENT_WORKDIR} \
+  && chown couchbase:couchbase /home/couchbase/.jenkins ${AGENT_WORKDIR}
 
 # Docker Swarm properties - keep this towards end of Dockerfile
 COPY build/swarm*.properties /

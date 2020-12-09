@@ -83,7 +83,7 @@ RUN apt-get update && \
     update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1 && \
     curl https://bootstrap.pypa.io/get-pip.py | python3 && \
     rm /usr/local/bin/pip /usr/local/bin/easy_install && \
-    pip3 install lxml oauthlib==0.7.2 jwt pycrypto jira boto3 pbr && \
+    pip3 install lxml oauthlib jwt pycrypto jira boto3 pbr && \
     pip3 install sgmllib3k==1.0.0 paramiko==2.7.1 httplib2==0.17.1 pyyaml==5.3.1 \
          beautifulsoup4==4.8.2 Geohash==1.0 python-geohash==0.8.5 deepdiff==4.3.2 \
          pyes==0.99.6 pytz==2019.3 requests==2.23.0 jsonpickle==1.3 \
@@ -145,7 +145,9 @@ RUN curl --create-dirs -fsSLo /usr/share/jenkins/agent.jar https://repo.jenkins-
   && ln -sf /usr/share/jenkins/agent.jar /usr/share/jenkins/slave.jar
 
 ENV AGENT_WORKDIR=/home/couchbase/agent
-RUN mkdir /home/couchbase/.jenkins && mkdir -p ${AGENT_WORKDIR}
+RUN mkdir /home/couchbase/.jenkins && mkdir -p ${AGENT_WORKDIR} \
+  && chown couchbase:couchbase /home/couchbase/.jenkins ${AGENT_WORKDIR}
+
 
 # Set LANG
 ENV LANG=en_US.UTF-8
