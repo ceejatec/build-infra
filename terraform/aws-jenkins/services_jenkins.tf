@@ -21,6 +21,12 @@ locals {
   analytics_ui_port   = 8080
   analytics_jnlp_port = 50002
 
+  # mobile.jenkins.couchbase.com
+  mobile_cpu       = 2048
+  mobile_memory    = 4096
+  mobile_ui_port   = 8080
+  mobile_jnlp_port = 50000
+
   # jenkins workers
   worker_cpu    = 4096
   worker_memory = 7168
@@ -146,5 +152,52 @@ module "analytics_jenkins" {
 
   images = {
     "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
+  }
+}
+
+module "mobile_jenkins" {
+  source  = "./services/jenkins"
+  stopped = true #local.stopped || local.jenkins_stopped
+  prefix  = local.name
+  lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
+
+  ui_port       = local.mobile_ui_port
+  jnlp_port     = local.mobile_jnlp_port
+  hostname      = "mobile"
+  subdomain     = "jenkins"
+  image         = local.jenkins_image
+  master_cpu    = local.mobile_cpu
+  master_memory = local.mobile_memory
+  context       = "EC2"
+
+  efs_security_group = aws_security_group.efs
+
+  domain              = local.domain
+  dns_namespace       = aws_service_discovery_private_dns_namespace.main
+  worker_cpu          = local.worker_cpu
+  worker_memory       = local.worker_memory
+  vpc_id              = module.vpc.vpc_id
+  ecs_cluster         = aws_ecs_cluster.main
+  private_key         = tls_private_key.main
+  public_subnets      = module.vpc.public_subnets
+  private_subnets     = module.vpc.private_subnets
+  ecs_task_runner_arn = aws_iam_policy.ecs_task_runner.arn
+  efs_file_system     = aws_efs_file_system.main
+  ecs_execution_role  = aws_iam_role.ec2_ecs
+  ecs_role            = aws_iam_role.ecs
+  profiledata_key     = module.profiledata.key
+  region              = local.region
+
+  #mobile doesn't need these
+  images = {
+    #"litecore-centos6"     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-69-build"
+    #"litecore-centos6-gcc" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-69-gcc-build"
+    #"litecore-centos72"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-72-build"
+    #"litecore-centos73"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-73-build"
+    #"litecore-ubuntu14"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-ubuntu-1404-build"
+    #"sgw-centos6"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-centos6-build"
+    #"sgw-centos7"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-centos7-build"
+    #"sgw-ubuntu16"         = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-ubuntu16-build"
+    #"liteandroid-ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/liteandroid-ubuntu-1804-build"
   }
 }
