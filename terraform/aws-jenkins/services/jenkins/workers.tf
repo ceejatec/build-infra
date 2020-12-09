@@ -2,7 +2,7 @@
 resource "aws_ecs_task_definition" "worker" {
   for_each = var.images
 
-  family = "${var.prefix}-${var.hostname}-${each.key}"
+  family = "${var.prefix}-WORKER-${var.hostname}-build-${each.key}"
 
   container_definitions = templatefile("${path.module}/files/tasks/worker.tpl", {
     cloudwatch_log_group  = aws_cloudwatch_log_group.jenkins_workers.name

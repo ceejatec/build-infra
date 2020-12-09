@@ -32,7 +32,7 @@ locals {
   latestbuilds_subdomain = "service"
   latestbuilds_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/latestbuilds"
   latestbuilds_cpu       = 1024
-  latestbuilds_memory    = 2048
+  latestbuilds_memory    = 4096
 
   # nexus
   nexus_context          = "EC2"
@@ -56,7 +56,7 @@ locals {
   go_proxy_subdomain = "build"
   go_proxy_image     = "gomods/athens:v0.9.0"
   go_proxy_cpu       = 1024
-  go_proxy_memory    = 2048
+  go_proxy_memory    = 4096
 
   # profiledata
   profiledata_context   = "EC2"
@@ -64,7 +64,7 @@ locals {
   profiledata_subdomain = "build"
   profiledata_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/profiledata:latest"
   profiledata_cpu       = 512
-  profiledata_memory    = 1024
+  profiledata_memory    = 4096
 }
 
 resource "random_string" "key_file" {

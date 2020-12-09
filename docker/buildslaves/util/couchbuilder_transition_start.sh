@@ -143,12 +143,13 @@ command -v gpg >/dev/null 2>&1 && {
 
 # Handle invocations by the ECS plugin
 [[ "$1" == "-url" ]] && {
+  unset profiledata_key
   URL="-url $2"
   TUNNEL="-tunnel $4"
   OPT_JENKINS_SECRET=$5
   OPT_JENKINS_AGENT_NAME=$6
   JAVA_BIN=java
-  exec $JAVA_BIN $JAVA_OPTS -cp /usr/share/jenkins/agent.jar hudson.remoting.jnlp.Main -headless $TUNNEL $URL $WORKDIR $WEB_SOCKET $DIRECT $PROTOCOLS $INSTANCE_IDENTITY $OPT_JENKINS_SECRET $OPT_JENKINS_AGENT_NAME
+  exec sudo -u couchbase --set-home --preserve-env $JAVA_BIN $JAVA_OPTS -cp /usr/share/jenkins/agent.jar hudson.remoting.jnlp.Main -headless $TUNNEL $URL $WORKDIR $WEB_SOCKET $DIRECT $PROTOCOLS $INSTANCE_IDENTITY $OPT_JENKINS_SECRET $OPT_JENKINS_AGENT_NAME
   exit
 }
 

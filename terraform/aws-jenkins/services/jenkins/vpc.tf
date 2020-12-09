@@ -18,12 +18,21 @@ resource "aws_security_group_rule" "master_egress" {
   security_group_id = aws_security_group.jenkins_master.id
 }
 
-resource "aws_security_group_rule" "master_http" {
+resource "aws_security_group_rule" "master_lb_http" {
   type                     = "ingress"
   from_port                = var.ui_port
   to_port                  = var.ui_port
   protocol                 = "TCP"
   source_security_group_id = aws_security_group.ui_load_balancer.id
+  security_group_id        = aws_security_group.jenkins_master.id
+}
+
+resource "aws_security_group_rule" "master_worker_http" {
+  type                     = "ingress"
+  from_port                = var.ui_port
+  to_port                  = var.ui_port
+  protocol                 = "TCP"
+  source_security_group_id = aws_security_group.jenkins_worker.id
   security_group_id        = aws_security_group.jenkins_master.id
 }
 
