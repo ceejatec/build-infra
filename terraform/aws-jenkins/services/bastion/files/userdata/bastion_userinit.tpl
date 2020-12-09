@@ -1,10 +1,20 @@
 #!/bin/bash
-sleep 120
 
 sudo su - root
 
-# Install AWS EFS Utilities
-yum install -y amazon-efs-utils
+# Download packer
+(
+    cd /tmp
+    curl -LO https://releases.hashicorp.com/packer/1.6.5/packer_1.6.5_linux_amd64.zip
+    unzip packer_1.6.5_linux_amd64.zip
+    mv packer /usr/local/bin
+)
+
+# Install AWS EFS Utilities for mounting EFS volumes
+yum install -y amazon-efs-utils python3 python3-pip
+
+# install ansible for running packer - specifically 2.85 because filtering changes in higher versions break some of our playbooks
+pip3 install "ansible==2.8.5"
 
 mkdir -p /efs/latestbuilds
 chown 1000:1000 /efs/latestbuilds
@@ -28,4 +38,7 @@ echo "mount -t efs -o iam,tls,accesspoint=${nexus_accesspoint} ${filesystem}: /e
 echo "mount -t efs -o iam,tls,accesspoint=${downloads_accesspoint} ${filesystem}: /efs/downloads" >> /root/mount.sh
 
 chmod a+x /root/mount.sh
+
+sleep 120
+
 /root/mount.sh

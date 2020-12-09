@@ -24,10 +24,6 @@ locals {
   mobile_name            = "mobile"
   mobile_subdomain       = "jenkins"
   mobile_image           = "284614897128.dkr.ecr.us-east-1.amazonaws.com/jenkins-master"
-  mobile_cpu             = 1024
-  mobile_memory          = 2048
-  mobile_ui_port         = 8080
-  mobile_jnlp_port       = 50000
 
 
   # latestbuilds

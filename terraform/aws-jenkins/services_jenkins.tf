@@ -41,7 +41,7 @@ module "server_jenkins" {
   ui_port       = local.server_ui_port
   jnlp_port     = local.server_jnlp_port
   hostname      = "server"
-  subdomain     = "build"
+  subdomain     = "jenkins"
   image         = local.jenkins_image
   master_cpu    = local.server_cpu
   master_memory = local.server_memory
@@ -66,23 +66,23 @@ module "server_jenkins" {
   region              = local.region
 
   images = {
-    "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:latest"
-    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:latest"
-    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:latest"
-    "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:latest"
-    "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:latest"
-    "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:latest"
-    "suse15"   = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:latest"
-    "ubuntu16" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:latest"
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
-    "ubuntu20" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:latest"
+    "amzn2"    = "couchbasebuild/server-amzn2-build:20201209"
+    "centos7"  = "couchbasebuild/server-centos7-build:20201209"
+    "centos8"  = "couchbasebuild/server-centos8-build:20201209"
+    "debian8"  = "couchbasebuild/server-debian8-build:20201209"
+    "debian9"  = "couchbasebuild/server-debian9-build:20201209"
+    "debian10" = "couchbasebuild/server-debian10-build:20201209"
+    "suse15"   = "couchbasebuild/server-suse15-build:20201209"
+    "ubuntu16" = "couchbasebuild/server-ubuntu16-build:20201209"
+    "ubuntu18" = "couchbasebuild/server-ubuntu18-build:20201209"
+    "ubuntu20" = "couchbasebuild/server-ubuntu20-build:20201209"
   }
 }
 
 module "cv_jenkins" {
   source  = "./services/jenkins"
-  stopped = true #local.stopped || local.jenkins_stopped
-  lb_stopped = true #local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
+  stopped = local.stopped || local.jenkins_stopped
+  lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
   prefix  = local.name
 
   ui_port       = local.cv_ui_port

@@ -1,10 +1,6 @@
-resource "aws_ssm_parameter" "couchbase_server_macos_cv_ssh_config" {
-  name  = "${var.prefix}-couchbase_server_macos_cv_ssh_config"
-  type  = "SecureString"
-  value = file("~/aws-ssh/couchbase-server/macos/cv/.ssh/config")
-}
-resource "aws_ssm_parameter" "couchbase_server_shared_m2_settings" {
-  name  = "${var.prefix}-couchbase_server_shared_m2_settings"
+# Shared
+resource "aws_ssm_parameter" "couchbase_server_shared_m2_settings_xml" {
+  name  = "${var.prefix}-couchbase_server_shared_m2_settings_xml"
   type  = "SecureString"
   value = file("~/aws-ssh/couchbase-server/shared/.m2/settings.xml")
 }
@@ -18,16 +14,78 @@ resource "aws_ssm_parameter" "couchbase_server_shared_gitconfig" {
   type  = "SecureString"
   value = file("~/aws-ssh/couchbase-server/shared/.gitconfig")
 }
-resource "aws_ssm_parameter" "couchbase_server_linux_cv_ssh_config" {
-  name  = "${var.prefix}-couchbase_server_linux_cv_ssh_config"
+
+# CV
+resource "aws_ssm_parameter" "couchbase_server_cv_linux_ssh_config" {
+  name  = "${var.prefix}-couchbase_server_cv_linux_ssh_config"
   type  = "SecureString"
-  value = file("~/aws-ssh/couchbase-server/linux/cv/.ssh/config")
+  value = file("~/aws-ssh/couchbase-server/cv/linux/.ssh/config")
 }
-resource "aws_ssm_parameter" "couchbase_server_linux_build_ssh_config" {
-  name  = "${var.prefix}-couchbase_server_linux_build_ssh_config"
+
+# Build
+resource "aws_ssm_parameter" "couchbase_server_build_linux_gitconfig" {
+  name  = "${var.prefix}-couchbase_server_build_linux_gitconfig"
   type  = "SecureString"
-  value = file("~/aws-ssh/couchbase-server/linux/build/.ssh/config")
+  value = file("~/aws-ssh/couchbase-server/build/linux/.gitconfig")
 }
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_config" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_config"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/config")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_gpg_rpm_signing" {
+  name  = "${var.prefix}-couchbase_server_build_linux_gpg_rpm_signing"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.gpg/rpm_signing")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_m2_settings_xml" {
+  name  = "${var.prefix}-couchbase_server_build_linux_m2_settings_xml"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.m2/settings.xml")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_environment" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_environment"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/environment")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_id_buildbot" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_id_buildbot"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/id_buildbot")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_id_cb_robot" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_id_cb_robot"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/id_cb-robot")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_id_ns_codereview" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_id_ns_codereview"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/id_ns-codereview")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_known_hosts" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_known_hosts"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/known_hosts")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_notarizer_token" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_notarizer_token"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/notarizer_token")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_ns_buildbot_rsa" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_ns_buildbot_rsa"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/ns-buildbot.rsa")
+}
+resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_patch_via_gerrit_ini" {
+  name  = "${var.prefix}-couchbase_server_build_linux_ssh_patch_via_gerrit_ini"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/build/linux/.ssh/patch_via_gerrit.ini")
+}
+
+
+# Windows
 resource "aws_ssm_parameter" "couchbase_server_windows_config" {
   name  = "${var.prefix}-couchbase_server_windows_config"
   type  = "SecureString"

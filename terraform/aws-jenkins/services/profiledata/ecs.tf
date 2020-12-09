@@ -41,17 +41,30 @@ resource "aws_ecs_task_definition" "profiledata" {
     profiledata_ssh_host_dsa_key        = aws_ssm_parameter.profiledata_ssh_host_dsa_key.arn
     profiledata_ssh_host_dsa_pubkey     = aws_ssm_parameter.profiledata_ssh_host_dsa_pubkey.arn
     # Config files
-    couchbase_server_macos_cv_ssh_config     = aws_ssm_parameter.couchbase_server_macos_cv_ssh_config.arn
+    #couchbase_server_cv_macos_ssh_config     = aws_ssm_parameter.couchbase_server_cv_macos_ssh_config.arn
     couchbase_server_shared_ssh_environment  = aws_ssm_parameter.couchbase_server_shared_ssh_environment.arn
     couchbase_server_shared_gitconfig        = aws_ssm_parameter.couchbase_server_shared_gitconfig.arn
-    couchbase_server_shared_m2_settings      = aws_ssm_parameter.couchbase_server_shared_m2_settings.arn
-    couchbase_server_linux_cv_ssh_config     = aws_ssm_parameter.couchbase_server_linux_cv_ssh_config.arn
-    couchbase_server_linux_build_ssh_config  = aws_ssm_parameter.couchbase_server_linux_build_ssh_config.arn
+    couchbase_server_shared_m2_settings_xml      = aws_ssm_parameter.couchbase_server_shared_m2_settings_xml.arn
+    couchbase_server_cv_linux_ssh_config     = aws_ssm_parameter.couchbase_server_cv_linux_ssh_config.arn
     couchbase_server_windows_config          = aws_ssm_parameter.couchbase_server_windows_config.arn
     couchbase_server_windows_authorized_keys = aws_ssm_parameter.couchbase_server_windows_authorized_keys.arn
     couchbase_server_windows_environment     = aws_ssm_parameter.couchbase_server_windows_environment.arn
     couchbase_server_windows_known_hosts     = aws_ssm_parameter.couchbase_server_windows_known_hosts.arn
-    # Secrets
+    # Build Linux
+    couchbase_server_build_linux_gpg_rpm_signing   = aws_ssm_parameter.couchbase_server_build_linux_gpg_rpm_signing.arn
+    couchbase_server_build_linux_m2_settings_xml   = aws_ssm_parameter.couchbase_server_build_linux_m2_settings_xml.arn
+    couchbase_server_build_linux_gitconfig   = aws_ssm_parameter.couchbase_server_build_linux_gitconfig.arn
+    couchbase_server_build_linux_ssh_config  = aws_ssm_parameter.couchbase_server_build_linux_ssh_config.arn
+    couchbase_server_build_linux_ssh_environment  = aws_ssm_parameter.couchbase_server_build_linux_ssh_environment.arn
+    couchbase_server_build_linux_ssh_id_buildbot  = aws_ssm_parameter.couchbase_server_build_linux_ssh_id_buildbot.arn
+    couchbase_server_build_linux_ssh_id_cb_robot  = aws_ssm_parameter.couchbase_server_build_linux_ssh_id_cb_robot.arn
+    couchbase_server_build_linux_ssh_id_ns_codereview  = aws_ssm_parameter.couchbase_server_build_linux_ssh_id_ns_codereview.arn
+    couchbase_server_build_linux_ssh_known_hosts  = aws_ssm_parameter.couchbase_server_build_linux_ssh_known_hosts.arn
+    couchbase_server_build_linux_ssh_notarizer_token  = aws_ssm_parameter.couchbase_server_build_linux_ssh_notarizer_token.arn
+    couchbase_server_build_linux_ssh_ns_buildbot_rsa  = aws_ssm_parameter.couchbase_server_build_linux_ssh_ns_buildbot_rsa.arn
+    couchbase_server_build_linux_ssh_patch_via_gerrit_ini  = aws_ssm_parameter.couchbase_server_build_linux_ssh_patch_via_gerrit_ini.arn
+
+
   })
   execution_role_arn = var.ecs_iam_role.arn
   task_role_arn      = aws_iam_role.profiledata.arn
