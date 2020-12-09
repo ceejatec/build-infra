@@ -65,6 +65,54 @@
         {
             "Effect": "Allow",
             "Principal": {
+                "AWS": ${mobile_jenkins_principals}
+            },
+            "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "elasticfilesystem:AccessPointArn": "${mobile_jenkins_access_point_arn}"
+                }
+            },
+            "Resource": "${filesystem_arn}"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": ${nexus_principals}
+            },
+            "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "elasticfilesystem:AccessPointArn": "${nexus_access_point_arn}"
+                }
+            },
+            "Resource": "${filesystem_arn}"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": ${downloads_principals}
+            },
+            "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "elasticfilesystem:AccessPointArn": "${downloads_access_point_arn}"
+                }
+            },
+            "Resource": "${filesystem_arn}"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
                 "AWS": ${latestbuilds_principals}
             },
             "Action": [

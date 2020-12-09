@@ -19,6 +19,16 @@ locals {
   ec2_instance_type = "c5ad.4xlarge"
   ec2_max_instances = 4
 
+  # mobile jenkins
+  mobile_context         = "EC2"
+  mobile_name            = "mobile"
+  mobile_subdomain       = "jenkins"
+  mobile_image           = "284614897128.dkr.ecr.us-east-1.amazonaws.com/jenkins-master"
+  mobile_cpu             = 1024
+  mobile_memory          = 2048
+  mobile_ui_port         = 8080
+  mobile_jnlp_port       = 50000
+
 
   # latestbuilds
   latestbuilds_context   = "EC2"
@@ -27,6 +37,22 @@ locals {
   latestbuilds_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/latestbuilds"
   latestbuilds_cpu       = 1024
   latestbuilds_memory    = 2048
+
+  # nexus
+  nexus_context          = "EC2"
+  nexus_name             = "nexus"
+  nexus_subdomain        = "build"
+  nexus_image            = "284614897128.dkr.ecr.us-east-1.amazonaws.com/nexus"
+  nexus_cpu              = 1024
+  nexus_memory           = 2048
+
+  # downloads
+  downloads_context      = "FARGATE"
+  downloads_name         = "downloads"
+  downloads_subdomain    = "build"
+  downloads_image        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/mobile-util"
+  downloads_cpu          = 512
+  downloads_memory       = 1024
 
   # go proxy
   go_proxy_context   = "EC2"

@@ -12,6 +12,15 @@ resource "aws_efs_file_system_policy" "main" {
     server_jenkins_access_point_arn    = module.server_jenkins.efs_access_point.arn
     server_jenkins_principals          = "[\"${module.server_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
 
+    mobile_jenkins_access_point_arn    = module.mobile_jenkins.efs_access_point.arn
+    mobile_jenkins_principals          = "[\"${module.mobile_jenkins.master_iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+
+    nexus_access_point_arn             = module.nexus.efs_access_point.arn
+    nexus_principals                   = "[\"${module.nexus.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+
+    downloads_access_point_arn         = module.downloads.efs_access_point.arn
+    downloads_principals               = "[\"${module.downloads.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+
     latestbuilds_access_point_arn      = module.latestbuilds.efs_access_point.arn
     latestbuilds_principals            = "[\"${module.latestbuilds.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
   })
@@ -28,6 +37,8 @@ module "bastion" {
   instance_type                 = local.bastion_instance_type
   public_subnets                = module.vpc.public_subnets
   latestbuilds_access_point     = module.latestbuilds.efs_access_point
+  nexus_access_point            = module.nexus.efs_access_point
+  downloads_access_point        = module.downloads.efs_access_point
 
   analytics_jenkins_access_point       = module.analytics_jenkins.efs_access_point
   analytics_jenkins_security_group     = module.analytics_jenkins.master_security_group
@@ -40,6 +51,10 @@ module "bastion" {
   server_jenkins_access_point   = module.server_jenkins.efs_access_point
   server_jenkins_security_group = module.server_jenkins.master_security_group
   server_jenkins_iam_policy     = module.server_jenkins.master_iam_policy
+
+  mobile_jenkins_access_point   = module.mobile_jenkins.efs_access_point
+  mobile_jenkins_security_group = module.mobile_jenkins.master_security_group
+  mobile_jenkins_iam_policy     = module.mobile_jenkins.master_iam_policy
 
   efs_file_system               = aws_efs_file_system.main
   ssh_key_path                  = local.ssh_key_path
@@ -112,6 +127,56 @@ module "profiledata" {
   dns_namespace               = aws_service_discovery_private_dns_namespace.main
   ecs_cluster                 = aws_ecs_cluster.main
   ecs_iam_role                = aws_iam_role.ecs
+}
+
+module "nexus" {
+  source = "./services/nexus"
+  prefix = local.name
+
+  efs_security_group = aws_security_group.efs
+
+  cpu                         = local.nexus_cpu
+  memory                      = local.nexus_memory
+  image                       = local.nexus_image
+  region                      = local.region
+  stopped                     = local.stopped
+  context                     = local.nexus_context
+  hostname                    = local.nexus_name
+  subdomain                   = local.nexus_subdomain
+  domain                      = local.private_domain
+  vpc_id                      = module.vpc.vpc_id
+  private_subnets             = module.vpc.private_subnets
+  efs_file_system             = aws_efs_file_system.main
+  ecs_execution_role          = aws_iam_role.ec2_ecs
+  dns_namespace               = aws_service_discovery_private_dns_namespace.main
+  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
+  ecs_cluster                 = aws_ecs_cluster.main
+  bastion_security_group      = module.bastion.security_group
+}
+
+module "downloads" {
+  source = "./services/downloads"
+  prefix = local.name
+
+  efs_security_group = aws_security_group.efs
+
+  cpu                         = local.downloads_cpu
+  memory                      = local.downloads_memory
+  image                       = local.downloads_image
+  region                      = local.region
+  stopped                     = local.stopped
+  context                     = local.downloads_context
+  hostname                    = local.downloads_name
+  subdomain                   = local.downloads_subdomain
+  domain                      = local.private_domain
+  vpc_id                      = module.vpc.vpc_id
+  private_subnets             = module.vpc.private_subnets
+  efs_file_system             = aws_efs_file_system.main
+  ecs_execution_role          = aws_iam_role.ec2_ecs
+  dns_namespace               = aws_service_discovery_private_dns_namespace.main
+  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
+  ecs_cluster                 = aws_ecs_cluster.main
+  bastion_security_group      = module.bastion.security_group
 }
 
 
@@ -198,3 +263,50 @@ module "profiledata" {
 #     "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
 #   }
 # }
+
+module "mobile_jenkins" {
+  source  = "./services/jenkins"
+  stopped = false
+  prefix  = local.name
+  lb_stopped = local.lbs_stopped
+
+  ui_port       = local.mobile_ui_port
+  jnlp_port     = local.mobile_jnlp_port
+  hostname      = local.mobile_name
+  subdomain     = local.mobile_subdomain
+  image         = local.mobile_image
+  master_cpu    = local.mobile_cpu
+  master_memory = local.mobile_memory
+  context       = local.mobile_context
+
+  efs_security_group = aws_security_group.efs
+
+  domain              = local.private_domain
+  dns_namespace       = aws_service_discovery_private_dns_namespace.main
+  worker_cpu          = local.worker_cpu
+  worker_memory       = local.worker_memory
+  vpc_id              = module.vpc.vpc_id
+  ecs_cluster         = aws_ecs_cluster.main
+  private_key         = tls_private_key.main
+  public_subnets      = module.vpc.public_subnets
+  private_subnets     = module.vpc.private_subnets
+  ecs_task_runner_arn = aws_iam_policy.ecs_task_runner.arn
+  efs_file_system     = aws_efs_file_system.main
+  ecs_execution_role  = aws_iam_role.ec2_ecs
+  ecs_role            = aws_iam_role.ecs
+  profiledata_key     = module.profiledata.key
+  region              = local.region
+
+  #mobile doesn't need these
+  images = {
+    #"litecore-centos6"     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-69-build"
+    #"litecore-centos6-gcc" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-69-gcc-build"
+    #"litecore-centos72"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-72-build"
+    #"litecore-centos73"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-73-build"
+    #"litecore-ubuntu14"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-ubuntu-1404-build"
+    #"sgw-centos6"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-centos6-build"
+    #"sgw-centos7"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-centos7-build"
+    #"sgw-ubuntu16"         = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-ubuntu16-build"
+    #"liteandroid-ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/liteandroid-ubuntu-1804-build"
+  }
+}

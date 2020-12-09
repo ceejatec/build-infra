@@ -23,6 +23,9 @@ resource "aws_instance" "bastion" {
     analytics_jenkins_accesspoint = var.analytics_jenkins_access_point.id
     cv_jenkins_accesspoint        = var.cv_jenkins_access_point.id
     server_jenkins_accesspoint    = var.server_jenkins_access_point.id
+    mobile_jenkins_accesspoint    = var.mobile_jenkins_access_point.id
+    nexus_accesspoint             = var.nexus_access_point.id
+    downloads_accesspoint         = var.downloads_access_point.id
     latestbuilds_accesspoint      = var.latestbuilds_access_point.id
     filesystem                    = var.efs_file_system.id
   })
@@ -31,6 +34,7 @@ resource "aws_instance" "bastion" {
     aws_security_group.bastion.id,
     var.server_jenkins_security_group.id,
     var.cv_jenkins_security_group.id,
+    var.mobile_jenkins_security_group.id
   ]
 
   root_block_device {
