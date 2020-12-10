@@ -4,8 +4,8 @@
         <!-- ubuntu:18 -->
         <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
           <templateName>ubuntu18_4CPU_8GB</templateName>
-          <label>ubuntu</label>
-          <taskDefinitionOverride>${task_prefix}-couchbase-server-cv-ubuntu18</taskDefinitionOverride>
+          <label>ubuntu-18.04 master</label>
+          <taskDefinitionOverride>${task_prefix}-WORKER-cv-build-ubuntu18</taskDefinitionOverride>
           <defaultCapacityProvider>true</defaultCapacityProvider>
           <remoteFSRoot>/home/couchbase/jenkins</remoteFSRoot>
           <subnets>${subnets}</subnets>

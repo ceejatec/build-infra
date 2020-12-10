@@ -63,8 +63,17 @@ resource "aws_ecs_task_definition" "profiledata" {
     couchbase_server_build_linux_ssh_notarizer_token  = aws_ssm_parameter.couchbase_server_build_linux_ssh_notarizer_token.arn
     couchbase_server_build_linux_ssh_ns_buildbot_rsa  = aws_ssm_parameter.couchbase_server_build_linux_ssh_ns_buildbot_rsa.arn
     couchbase_server_build_linux_ssh_patch_via_gerrit_ini  = aws_ssm_parameter.couchbase_server_build_linux_ssh_patch_via_gerrit_ini.arn
-
-
+    # CV Linux
+    couchbase_server_cv_linux_gitconfig   = aws_ssm_parameter.couchbase_server_cv_linux_gitconfig.arn
+    couchbase_server_cv_linux_m2_settings_xml   = aws_ssm_parameter.couchbase_server_cv_linux_m2_settings_xml.arn
+    couchbase_server_cv_linux_ssh_config   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_config.arn
+    couchbase_server_cv_linux_ssh_id_ns_codereview   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_id_ns_codereview.arn
+    couchbase_server_cv_linux_ssh_known_hosts   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_known_hosts.arn
+    couchbase_server_cv_linux_ssh_ns_buildbot_rsa   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_ns_buildbot_rsa.arn
+    couchbase_server_cv_linux_ssh_patch_via_gerrit_ini   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_patch_via_gerrit_ini.arn
+    couchbase_server_cv_linux_ssh_id_buildbot   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_id_buildbot.arn
+    couchbase_server_cv_linux_ssh_environment   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_environment.arn
+    couchbase_server_cv_linux_ssh_buildbot_id_dsa   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_buildbot_id_dsa.arn
   })
   execution_role_arn = var.ecs_iam_role.arn
   task_role_arn      = aws_iam_role.profiledata.arn

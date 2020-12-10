@@ -62,7 +62,7 @@ locals {
   profiledata_context   = "EC2"
   profiledata_name      = "profiledata"
   profiledata_subdomain = "build"
-  profiledata_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/profiledata:latest"
+  profiledata_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/profiledata:20201210"
   profiledata_cpu       = 512
   profiledata_memory    = 4096
 }

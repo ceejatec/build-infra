@@ -68,16 +68,16 @@ module "server_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:latest"
-    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:latest"
-    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:latest"
-    "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:latest"
-    "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:latest"
-    "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:latest"
-    "suse15"   = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:latest"
-    "ubuntu16" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:latest"
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
-    "ubuntu20" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:latest"
+    "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:20201210"
+    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201210"
+    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:20201210"
+    "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:20201210"
+    "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:20201210"
+    "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:20201210"
+    "suse15"   = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:20201210"
+    "ubuntu16" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:20201210"
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:20201210"
+    "ubuntu20" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:20201210"
   }
 }
 
@@ -117,7 +117,7 @@ module "cv_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-cv:latest"
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-cv:20201210"
   }
 }
 
