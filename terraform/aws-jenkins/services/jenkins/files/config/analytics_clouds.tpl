@@ -7,7 +7,7 @@
           <label>ubuntu</label>
           <taskDefinitionOverride>${task_prefix}-couchbase-server-analytics-ubuntu18</taskDefinitionOverride>
           <defaultCapacityProvider>true</defaultCapacityProvider>
-          <remoteFSRoot>/home/jenkins</remoteFSRoot>
+          <remoteFSRoot>/home/couchbase/jenkins</remoteFSRoot>
           <subnets>${subnets}</subnets>
           <securityGroups>${security_groups}</securityGroups>
           <defaultCapacityProvider>true</defaultCapacityProvider>

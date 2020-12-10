@@ -124,7 +124,7 @@ module "cv_jenkins" {
 module "analytics_jenkins" {
   source  = "./services/jenkins"
   stopped = true #local.stopped || local.jenkins_stopped
-  lb_stopped = true #local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
+  lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
   prefix  = local.name
 
   ui_port       = local.analytics_ui_port
