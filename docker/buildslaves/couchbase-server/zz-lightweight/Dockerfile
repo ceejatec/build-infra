@@ -1,6 +1,6 @@
 # Docker container for Ubuntu 16.04
 
-FROM couchbasebuild/server-ubuntu16-build:20200211
+FROM couchbasebuild/server-ubuntu16-build:20201210
 LABEL maintainer="build-team@couchbase.com"
 
 # Install python3-apt
