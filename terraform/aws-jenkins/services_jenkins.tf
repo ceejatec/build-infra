@@ -65,17 +65,19 @@ module "server_jenkins" {
   profiledata_key     = module.profiledata.key
   region              = local.region
 
+  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
+
   images = {
-    "amzn2"    = "couchbasebuild/server-amzn2-build:20201209"
-    "centos7"  = "couchbasebuild/server-centos7-build:20201209"
-    "centos8"  = "couchbasebuild/server-centos8-build:20201209"
-    "debian8"  = "couchbasebuild/server-debian8-build:20201209"
-    "debian9"  = "couchbasebuild/server-debian9-build:20201209"
-    "debian10" = "couchbasebuild/server-debian10-build:20201209"
-    "suse15"   = "couchbasebuild/server-suse15-build:20201209"
-    "ubuntu16" = "couchbasebuild/server-ubuntu16-build:20201209"
-    "ubuntu18" = "couchbasebuild/server-ubuntu18-build:20201209"
-    "ubuntu20" = "couchbasebuild/server-ubuntu20-build:20201209"
+    "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:latest"
+    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:latest"
+    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:latest"
+    "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:latest"
+    "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:latest"
+    "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:latest"
+    "suse15"   = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:latest"
+    "ubuntu16" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:latest"
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
+    "ubuntu20" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:latest"
   }
 }
 
@@ -111,6 +113,8 @@ module "cv_jenkins" {
   ecs_role            = aws_iam_role.ecs
   profiledata_key     = module.profiledata.key
   region              = local.region
+
+  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
     "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
@@ -150,6 +154,8 @@ module "analytics_jenkins" {
   profiledata_key     = module.profiledata.key
   region              = local.region
 
+  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
+
   images = {
     "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
   }
@@ -187,6 +193,8 @@ module "mobile_jenkins" {
   ecs_role            = aws_iam_role.ecs
   profiledata_key     = module.profiledata.key
   region              = local.region
+
+  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   #mobile doesn't need these
   images = {

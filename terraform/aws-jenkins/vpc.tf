@@ -56,6 +56,15 @@ resource "aws_security_group" "ecs_instances" {
     cidr_blocks = module.vpc.private_subnets_cidr_blocks
   }
 
+  # Unrestricted ingress from private subnets
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    security_groups = [module.bastion.security_group.id]
+  }
+
+
   egress {
     from_port   = 0
     to_port     = 0
