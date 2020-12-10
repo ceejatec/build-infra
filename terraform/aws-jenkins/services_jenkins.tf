@@ -19,7 +19,7 @@ locals {
   analytics_cpu       = 2048
   analytics_memory    = 4096
   analytics_ui_port   = 8080
-  analytics_jnlp_port = 50002
+  analytics_jnlp_port = 50000
 
   # mobile.jenkins.couchbase.com
   mobile_cpu       = 2048
@@ -90,7 +90,7 @@ module "cv_jenkins" {
   ui_port       = local.cv_ui_port
   jnlp_port     = local.cv_jnlp_port
   hostname      = "cv"
-  subdomain     = "build"
+  subdomain     = "jenkins"
   image         = local.jenkins_image
   master_cpu    = local.cv_cpu
   master_memory = local.cv_memory
@@ -117,7 +117,7 @@ module "cv_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-cv:latest"
   }
 }
 
@@ -130,7 +130,7 @@ module "analytics_jenkins" {
   ui_port       = local.analytics_ui_port
   jnlp_port     = local.analytics_jnlp_port
   hostname      = "analytics"
-  subdomain     = "build"
+  subdomain     = "jenkins"
   image         = local.jenkins_image
   master_cpu    = local.analytics_cpu
   master_memory = local.analytics_memory
@@ -157,7 +157,8 @@ module "analytics_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
+    # not quite yet known
+    #"ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
   }
 }
 
