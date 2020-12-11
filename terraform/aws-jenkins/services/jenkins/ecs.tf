@@ -70,4 +70,9 @@ resource "aws_ecs_service" "jenkins_master" {
     container_name   = var.hostname
     container_port   = var.ui_port
   }
+
+  ordered_placement_strategy {
+    type  = "binpack"
+    field = "cpu"
+  }
 }

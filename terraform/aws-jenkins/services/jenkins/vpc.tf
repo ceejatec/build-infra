@@ -36,6 +36,15 @@ resource "aws_security_group_rule" "master_worker_http" {
   security_group_id        = aws_security_group.jenkins_master.id
 }
 
+resource "aws_security_group_rule" "master_zz_lightweight_http" {
+  type                     = "ingress"
+  from_port                = var.ui_port
+  to_port                  = var.ui_port
+  protocol                 = "TCP"
+  source_security_group_id = module.zz_lightweight.security_group.id
+  security_group_id        = aws_security_group.jenkins_master.id
+}
+
 resource "aws_security_group_rule" "master_jnlp" {
   type                     = "ingress"
   from_port                = var.jnlp_port
@@ -44,6 +53,16 @@ resource "aws_security_group_rule" "master_jnlp" {
   source_security_group_id = aws_security_group.jenkins_worker.id
   security_group_id        = aws_security_group.jenkins_master.id
 }
+
+resource "aws_security_group_rule" "master_zz_lightweight_jnlp" {
+  type                     = "ingress"
+  from_port                = var.jnlp_port
+  to_port                  = var.jnlp_port
+  protocol                 = "TCP"
+  source_security_group_id = module.zz_lightweight.security_group.id
+  security_group_id        = aws_security_group.jenkins_master.id
+}
+
 
 resource "aws_security_group" "ui_load_balancer" {
   name        = "${var.prefix}-${var.hostname}-ui-load-balancer"

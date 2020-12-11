@@ -3,10 +3,39 @@
     "name": "${container_name}",
     "image": "${container_image}",
     "essential": true,
+    "command": ["swarm"],
     "portMappings": [
       {
         "containerPort": 22,
         "hostPort": 22
+      }
+    ],
+    "environment": [
+      {
+        "name": "JENKINS_MASTER",
+        "value": "${master_url}"
+      },
+      {
+        "name": "JENKINS_SLAVE_LABELS",
+        "value": "zz-lightweight"
+      },
+      {
+        "name": "JENKINS_SLAVE_NAME",
+        "value": "aws-zz-lightweight"
+      },
+      {
+        "name": "AGENT_MODE",
+        "value": "normal"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "jenkins_user",
+        "valueFrom": "${jenkins_user}"
+      },
+      {
+        "name": "jenkins_password",
+        "valueFrom": "${jenkins_password}"
       }
     ],
     "logConfiguration": {

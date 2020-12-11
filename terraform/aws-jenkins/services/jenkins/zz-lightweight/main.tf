@@ -1,14 +1,3 @@
-data "aws_iam_policy_document" "ecs_assume" {
-  statement {
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["ecs-tasks.amazonaws.com"]
-    }
-  }
-}
-
 resource "aws_cloudwatch_log_group" "zz_lightweight" {
   name              = "/${var.prefix}/${var.jenkins_name}/zz-lightweight"
   retention_in_days = 7
@@ -33,11 +22,6 @@ resource "aws_cloudwatch_log_group" "zz_lightweight" {
 #     failure_threshold = 1
 #   }
 # }
-
-resource "aws_iam_role" "zz_lightweight" {
-  name               = "${var.prefix}-${var.jenkins_name}-zz-lightweight"
-  assume_role_policy = data.aws_iam_policy_document.ecs_assume.json
-}
 
 resource "aws_security_group" "zz_lightweight" {
   name        = "${var.prefix}-${var.jenkins_name}-zz-lightweight"
@@ -65,6 +49,7 @@ resource "aws_security_group" "zz_lightweight" {
 }
 
 resource "aws_ecs_service" "zz_lightweight" {
+  count = (var.jenkins_name == "server" || var.jenkins_name == "cv") ? 1 : 0
   # LATEST isn't most recent, need to specify platform_version to mount EFS on Fargate
   # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
   platform_version = var.context == "EC2" ? "" : "1.4.0"
@@ -83,6 +68,11 @@ resource "aws_ecs_service" "zz_lightweight" {
     assign_public_ip = false
     security_groups  = [aws_security_group.zz_lightweight.id]
   }
+
+  ordered_placement_strategy {
+    type  = "binpack"
+    field = "cpu"
+  }
 }
 
 resource "aws_ecs_task_definition" "zz_lightweight" {
@@ -91,6 +81,9 @@ resource "aws_ecs_task_definition" "zz_lightweight" {
   container_definitions = templatefile("${path.module}/files/tasks/zz_lightweight.tpl", {
     cloudwatch_log_group  = aws_cloudwatch_log_group.zz_lightweight.name
     cloudwatch_log_prefix = "zz-lightweight"
+    master_url            = var.master_url
+    jenkins_user          = aws_ssm_parameter.jenkins_user.arn
+    jenkins_password      = aws_ssm_parameter.jenkins_password.arn
     container_name        = var.hostname
     container_image       = var.image
     region                = var.region

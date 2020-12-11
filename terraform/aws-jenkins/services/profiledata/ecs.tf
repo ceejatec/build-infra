@@ -18,6 +18,11 @@ resource "aws_ecs_service" "profiledata" {
     assign_public_ip = false
     security_groups  = [aws_security_group.profiledata.id]
   }
+
+  ordered_placement_strategy {
+    type  = "binpack"
+    field = "cpu"
+  }
 }
 
 resource "aws_ecs_task_definition" "profiledata" {

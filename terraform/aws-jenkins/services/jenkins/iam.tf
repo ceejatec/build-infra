@@ -103,7 +103,9 @@ resource "aws_iam_policy" "worker_ssm" {
           "secretsmanager:GetSecretValue"
         ],
         "Resource": [
-          "${var.profiledata_key.arn}"
+          "${var.profiledata_key.arn}",
+          "${module.zz_lightweight.secret_jenkins_user.arn}",
+          "${module.zz_lightweight.secret_jenkins_password.arn}"
         ]
       }
     ]

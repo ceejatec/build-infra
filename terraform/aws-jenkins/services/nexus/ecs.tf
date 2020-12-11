@@ -15,6 +15,11 @@ resource "aws_ecs_service" "nexus" {
     assign_public_ip = false
     security_groups  = [aws_security_group.nexus.id]
   }
+
+  ordered_placement_strategy {
+    type  = "binpack"
+    field = "cpu"
+  }
 }
 
 resource "aws_ecs_task_definition" "nexus" {

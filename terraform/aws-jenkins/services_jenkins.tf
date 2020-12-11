@@ -34,7 +34,7 @@ locals {
 
 module "server_jenkins" {
   source  = "./services/jenkins"
-  stopped = local.stopped || local.jenkins_stopped
+  stopped = local.stopped || local.jenkins_stopped || local.server_jenkins_stopped
   lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
   prefix  = local.name
 
@@ -68,22 +68,22 @@ module "server_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:20201210"
-    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201210"
-    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:20201210"
-    "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:20201210"
-    "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:20201210"
-    "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:20201210"
-    "suse15"   = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:20201210"
-    "ubuntu16" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:20201210"
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:20201210"
-    "ubuntu20" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:20201210"
+    "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:20201211"
+    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201211"
+    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:20201211"
+    "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:20201211"
+    "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:20201211"
+    "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:20201211"
+    "suse15"   = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:20201211"
+    "ubuntu16" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:20201211"
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:20201211"
+    "ubuntu20" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:20201211"
   }
 }
 
 module "cv_jenkins" {
   source  = "./services/jenkins"
-  stopped = local.stopped || local.jenkins_stopped
+  stopped = local.stopped || local.jenkins_stopped || local.cv_jenkins_stopped
   lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
   prefix  = local.name
 
@@ -117,13 +117,13 @@ module "cv_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-cv:20201210"
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-cv:20201211"
   }
 }
 
 module "analytics_jenkins" {
   source  = "./services/jenkins"
-  stopped = true #local.stopped || local.jenkins_stopped
+  stopped = true #local.stopped || local.jenkins_stopped || local.analytics_jenkins_stopped
   lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
   prefix  = local.name
 
@@ -164,7 +164,7 @@ module "analytics_jenkins" {
 
 module "mobile_jenkins" {
   source  = "./services/jenkins"
-  stopped = true #local.stopped || local.jenkins_stopped
+  stopped = local.stopped || local.jenkins_stopped || local.mobile_jenkins_stopped
   prefix  = local.name
   lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
 

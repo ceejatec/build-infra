@@ -4,6 +4,12 @@ locals {
   lbs_stopped     = false  # don't change this after going live, or we'll need dns updates as lb fqdns will change
   jenkins_stopped = false  # stops all jenkins masters
 
+  # these will take precedence over stopped = false
+  server_jenkins_stopped    = true
+  cv_jenkins_stopped        = true
+  mobile_jenkins_stopped    = false
+  analytics_jenkins_stopped = true
+
   ssh_key_path = "/tmp/aws-migration.pem" # key will be saved here on `terraform apply` if the file doesn't exist
 
   name           = "migration" # generally appears as a prefix
@@ -32,7 +38,7 @@ locals {
   latestbuilds_subdomain = "service"
   latestbuilds_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/latestbuilds"
   latestbuilds_cpu       = 1024
-  latestbuilds_memory    = 4096
+  latestbuilds_memory    = 2048
 
   # nexus
   nexus_context          = "EC2"
@@ -64,7 +70,7 @@ locals {
   profiledata_subdomain = "build"
   profiledata_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/profiledata:20201210"
   profiledata_cpu       = 512
-  profiledata_memory    = 4096
+  profiledata_memory    = 1024
 }
 
 resource "random_string" "key_file" {

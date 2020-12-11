@@ -34,7 +34,7 @@ variable "ecs_role" {}
 
 variable "ui_port" {
   type    = number
-  default = 80
+  default = 8080
 }
 
 variable "jnlp_port" {

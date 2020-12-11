@@ -104,6 +104,9 @@ RUN update-alternatives --install /usr/bin/python python /usr/bin/python2 200
 COPY gitconfig /home/couchbase/.gitconfig
 RUN chown couchbase:couchbase /home/couchbase/.gitconfig
 
+# Avoid having to rebuild image chain for simple start script modifications
+COPY ./couchbuilder_start.sh /usr/sbin/
+
 # Keep this stuff at the end, because the ARG declaration breaks Docker build caching
 ARG CONTAINER_TAG_ARG
 ENV CONTAINER_TAG=${CONTAINER_TAG_ARG}
