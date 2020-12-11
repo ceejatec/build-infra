@@ -200,13 +200,13 @@ module "mobile_jenkins" {
   #mobile doesn't need these
   images = {
     #"litecore-centos6"     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-69-build"
-    #"litecore-centos6-gcc" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-69-gcc-build"
-    #"litecore-centos72"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-72-build"
-    #"litecore-centos73"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-73-build"
-    #"litecore-ubuntu14"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-ubuntu-1404-build"
-    #"sgw-centos6"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-centos6-build"
-    #"sgw-centos7"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-centos7-build"
-    #"sgw-ubuntu16"         = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-ubuntu16-build"
-    #"liteandroid-ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/liteandroid-ubuntu-1804-build"
+    "litecore-centos6-gcc" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-69-gcc-build"
+    "litecore-centos72"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-72-build"
+    "litecore-centos73"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-centos-73-build"
+    "litecore-ubuntu14"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/litecore-ubuntu-1404-build"
+    "sgw-centos6"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-centos6-build"
+    "sgw-centos7"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-centos7-build"
+    "sgw-ubuntu16"         = "284614897128.dkr.ecr.us-east-1.amazonaws.com/sgw-ubuntu16-build"
+    "liteandroid-ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/liteandroid-ubuntu-1804-build"
   }
 }
