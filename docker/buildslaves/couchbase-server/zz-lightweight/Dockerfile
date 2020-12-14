@@ -24,6 +24,10 @@ ENTRYPOINT [ "/tini", "--", "/usr/sbin/couchbuilder_start.sh" ]
 # Avoid having to rebuild image chain for simple start script modifications
 COPY build/couchbuilder_start.sh /usr/sbin/
 
+# Hack because build-from-manifest script (and possibly others) hardcodes
+# python3.6
+RUN ln -s python3.7 /usr/bin/python3.6
+
 # Keep this stuff at the end, because the ARG declaration breaks
 # Docker build caching
 ARG CONTAINER_TAG_ARG
