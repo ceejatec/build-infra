@@ -69,8 +69,8 @@ module "server_jenkins" {
 
   images = {
     "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:20201211"
-    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201211"
-    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:20201211"
+    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201214"
+    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:20201214"
     "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:20201211"
     "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:20201211"
     "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:20201211"

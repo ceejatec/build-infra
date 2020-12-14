@@ -26,6 +26,10 @@
       {
         "name": "AGENT_MODE",
         "value": "normal"
+      },
+      {
+        "name": "JENKINS_SLAVE_EXECUTORS",
+        "value": "10"
       }
     ],
     "secrets": [

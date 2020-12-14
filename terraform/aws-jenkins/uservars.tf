@@ -5,7 +5,7 @@ locals {
   jenkins_stopped = false  # stops all jenkins masters
 
   # these will take precedence over stopped = false
-  server_jenkins_stopped    = true
+  server_jenkins_stopped    = false
   cv_jenkins_stopped        = true
   mobile_jenkins_stopped    = false
   analytics_jenkins_stopped = true
@@ -60,9 +60,17 @@ locals {
   go_proxy_context   = "EC2"
   go_proxy_name      = "goproxy"
   go_proxy_subdomain = "build"
-  go_proxy_image     = "gomods/athens:v0.9.0"
+  go_proxy_image     = "gomods/athens:v0.10.0"
   go_proxy_cpu       = 1024
   go_proxy_memory    = 4096
+
+  # maven cache
+  maven_cache_context   = "EC2"
+  maven_cache_name      = "maven-cache"
+  maven_cache_subdomain = "build"
+  maven_cache_image     = "284614897128.dkr.ecr.us-east-1.amazonaws.com/archiva:20201214"
+  maven_cache_cpu       = 1024
+  maven_cache_memory    = 2048
 
   # profiledata
   profiledata_context   = "EC2"

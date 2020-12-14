@@ -160,11 +160,12 @@ command -v gpg >/dev/null 2>&1 && {
   if $(sudo --help &>/dev/null)
   then
       exec sudo -u couchbase --set-home --preserve-env \
-        env -u SUDO_UID -u SUDO_GID -u SUDO_USER -u SUDO_COMMAND \
+        env -u profiledata_key -u SUDO_UID -u SUDO_GID -u SUDO_USER -u SUDO_COMMAND \
         PATH=/usr/local/bin:/usr/bin:/bin \
         $JAVA_BIN $JAVA_OPTS -cp /usr/share/jenkins/agent.jar hudson.remoting.jnlp.Main -headless $TUNNEL $URL $WORKDIR $WEB_SOCKET $DIRECT $PROTOCOLS $INSTANCE_IDENTITY $OPT_JENKINS_SECRET $OPT_JENKINS_AGENT_NAME
   else
-      exec sudo -u couchbase \
+      exec sudo -E -u couchbase \
+        env -u profiledata_key -u SUDO_UID -u SUDO_GID -u SUDO_USER -u SUDO_COMMAND \
         PATH=/usr/local/bin:/usr/bin:/bin \
         $JAVA_BIN $JAVA_OPTS -cp /usr/share/jenkins/agent.jar hudson.remoting.jnlp.Main -headless $TUNNEL $URL $WORKDIR $WEB_SOCKET $DIRECT $PROTOCOLS $INSTANCE_IDENTITY $OPT_JENKINS_SECRET $OPT_JENKINS_AGENT_NAME
   fi
