@@ -129,28 +129,28 @@ module "profiledata" {
   ecs_iam_role                = aws_iam_role.ecs
 }
 
-module "maven_cache" {
-  source                      = "./services/maven_cache"
-  prefix                      = local.name
-  vpc_id                      = module.vpc.vpc_id
-  ecs_cluster                 = aws_ecs_cluster.main
-  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
+# module "maven_cache" {
+#   source                      = "./services/maven_cache"
+#   prefix                      = local.name
+#   vpc_id                      = module.vpc.vpc_id
+#   ecs_cluster                 = aws_ecs_cluster.main
+#   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
-  hostname  = local.maven_cache_name
-  subdomain = local.maven_cache_subdomain
-  domain    = local.private_domain
+#   hostname  = local.maven_cache_name
+#   subdomain = local.maven_cache_subdomain
+#   domain    = local.private_domain
 
-  stopped = local.stopped
-  context = local.maven_cache_context
+#   stopped = local.stopped
+#   context = local.maven_cache_context
 
-  dns_namespace   = aws_service_discovery_private_dns_namespace.main
-  private_subnets = module.vpc.private_subnets
-  ecs_role        = aws_iam_role.ecs
-  image           = local.maven_cache_image
-  region          = local.region
-  cpu             = local.maven_cache_cpu
-  memory          = local.maven_cache_memory
-}
+#   dns_namespace   = aws_service_discovery_private_dns_namespace.main
+#   private_subnets = module.vpc.private_subnets
+#   ecs_role        = aws_iam_role.ecs
+#   image           = local.maven_cache_image
+#   region          = local.region
+#   cpu             = local.maven_cache_cpu
+#   memory          = local.maven_cache_memory
+# }
 
 module "nexus" {
   source = "./services/nexus"

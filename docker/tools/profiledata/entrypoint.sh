@@ -45,7 +45,7 @@ if [ "$AWS_EXECUTION_ENV" != "" ]; then # We're in AWS
   echo "$couchbase_server_build_linux_gitconfig" >/home/couchbase/couchbase-server/build/linux/.gitconfig
   echo "$couchbase_server_build_linux_gpg_rpm_signing" | base64 -d >/home/couchbase/couchbase-server/build/linux/.gpg/rpm_signing
   chmod 600 /home/couchbase/couchbase-server/build/linux/.gpg/rpm_signing
-  echo "$couchbase_server_build_linux_m2_settings_xml" >/home/couchbase/couchbase-server/build/linux/.m2/settings.xml
+  # echo "$couchbase_server_build_linux_m2_settings_xml" >/home/couchbase/couchbase-server/build/linux/.m2/settings.xml
   echo "$couchbase_server_build_linux_ssh_config" >/home/couchbase/couchbase-server/build/linux/.ssh/config
   echo "$couchbase_server_build_linux_ssh_environment" >/home/couchbase/couchbase-server/build/linux/.ssh/environment
   echo "$couchbase_server_build_linux_ssh_id_buildbot" >/home/couchbase/couchbase-server/build/linux/.ssh/id_buildbot
@@ -65,7 +65,7 @@ if [ "$AWS_EXECUTION_ENV" != "" ]; then # We're in AWS
   # couchbase-server / linux / cv
   mkdir /home/couchbase/couchbase-server/cv/linux/.m2/
   echo "$couchbase_server_cv_linux_gitconfig" >/home/couchbase/couchbase-server/cv/linux/.gitconfig
-  echo "$couchbase_server_cv_linux_m2_settings_xml" >/home/couchbase/couchbase-server/cv/linux/.m2/settings.xml
+  # echo "$couchbase_server_cv_linux_m2_settings_xml" >/home/couchbase/couchbase-server/cv/linux/.m2/settings.xml
   echo "$couchbase_server_cv_linux_ssh_config" >/home/couchbase/couchbase-server/cv/linux/.ssh/config
   echo "$couchbase_server_cv_linux_ssh_id_ns_codereview" >/home/couchbase/couchbase-server/cv/linux/.ssh/id_ns-codereview
   chmod 600 /home/couchbase/couchbase-server/cv/linux/.ssh/id_ns-codereview
