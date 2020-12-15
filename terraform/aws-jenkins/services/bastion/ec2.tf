@@ -27,6 +27,7 @@ resource "aws_instance" "bastion" {
     nexus_accesspoint             = var.nexus_access_point.id
     downloads_accesspoint         = var.downloads_access_point.id
     latestbuilds_accesspoint      = var.latestbuilds_access_point.id
+    proget_accesspoint            = var.proget_access_point.id
     filesystem                    = var.efs_file_system.id
   })
   iam_instance_profile = aws_iam_instance_profile.bastion.id

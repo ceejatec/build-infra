@@ -1,20 +1,20 @@
-resource "aws_security_group" "nexus" {
-  name        = "${var.prefix}-nexus"
-  description = "nexus"
+resource "aws_security_group" "proget" {
+  name        = "${var.prefix}-proget"
+  description = "proget"
   vpc_id      = var.vpc_id
 
   ingress {
     description = "HTTP"
-    from_port   = 8081
-    to_port     = 8081
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = var.private_subnets_cidr_blocks
   }
 
   ingress {
     description = "HTTP"
-    from_port   = 8081
-    to_port     = 8081
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     security_groups = [var.bastion_security_group.id]
   }
@@ -43,7 +43,7 @@ resource "aws_security_group" "nexus" {
   }
 
   tags = {
-    Name = "${var.prefix}-nexus"
+    Name = "${var.prefix}-proget"
   }
 }
 
@@ -52,6 +52,6 @@ resource "aws_security_group_rule" "efs" {
   from_port         = 2049
   to_port           = 2049
   protocol          = "tcp"
-  source_security_group_id = aws_security_group.nexus.id
+  source_security_group_id = aws_security_group.proget.id
   security_group_id = var.efs_security_group.id
 }

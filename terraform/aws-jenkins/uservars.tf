@@ -3,6 +3,7 @@ locals {
   bastion_enabled = true  # enable to create a bastion instance with ssh access for your IP
   lbs_stopped     = false  # don't change this after going live, or we'll need dns updates as lb fqdns will change
   jenkins_stopped = false  # stops all jenkins masters
+  proget_stopped  = false  # stops proget ec2
 
   # these will take precedence over stopped = false
   server_jenkins_stopped    = false
@@ -47,6 +48,12 @@ locals {
   nexus_image            = "284614897128.dkr.ecr.us-east-1.amazonaws.com/nexus"
   nexus_cpu              = 1024
   nexus_memory           = 2048
+
+  # proget
+  proget_name            = "proget"
+  proget_subdomain       = "build"
+  proget_ami             = "ami-0ebf1f6ace7f1f2e4"
+  proget_instance_type   = "c5a.large"
 
   # downloads
   downloads_context      = "FARGATE"

@@ -49,7 +49,7 @@ resource "aws_security_group" "zz_lightweight" {
 }
 
 resource "aws_ecs_service" "zz_lightweight" {
-  count = (var.jenkins_name == "server" || var.jenkins_name == "cv") ? 1 : 0
+  count = (var.jenkins_name == "server" || var.jenkins_name == "cv" || var.jenkins_name == "mobile" ) ? 1 : 0
   # LATEST isn't most recent, need to specify platform_version to mount EFS on Fargate
   # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
   platform_version = var.context == "EC2" ? "" : "1.4.0"

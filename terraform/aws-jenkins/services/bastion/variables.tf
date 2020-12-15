@@ -8,6 +8,7 @@ variable "efs_security_group" {}
 variable "efs_file_system" {}
 
 variable "latestbuilds_access_point" {}
+variable "proget_access_point" {}
 variable "nexus_access_point" {}
 variable "downloads_access_point" {}
 

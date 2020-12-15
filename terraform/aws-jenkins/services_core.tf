@@ -23,6 +23,9 @@ resource "aws_efs_file_system_policy" "main" {
 
     latestbuilds_access_point_arn      = module.latestbuilds.efs_access_point.arn
     latestbuilds_principals            = "[\"${module.latestbuilds.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
+
+    proget_access_point_arn            = module.proget.efs_access_point.arn
+    proget_principals                  = "[\"${module.proget.iam_role.arn}\",\"${module.proget.iam_role.arn}\"]"
   })
 }
 
@@ -38,6 +41,7 @@ module "bastion" {
   public_subnets                = module.vpc.public_subnets
   latestbuilds_access_point     = module.latestbuilds.efs_access_point
   nexus_access_point            = module.nexus.efs_access_point
+  proget_access_point           = module.proget.efs_access_point
   downloads_access_point        = module.downloads.efs_access_point
 
   analytics_jenkins_access_point       = module.analytics_jenkins.efs_access_point
@@ -175,6 +179,24 @@ module "nexus" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
   ecs_cluster                 = aws_ecs_cluster.main
   bastion_security_group      = module.bastion.security_group
+}
+
+module "proget" {
+  source = "./services/proget"
+  prefix = local.name
+
+  efs_security_group = aws_security_group.efs
+
+  region                      = local.region
+  vpc_id                      = module.vpc.vpc_id
+  private_subnets             = module.vpc.private_subnets
+  efs_file_system             = aws_efs_file_system.main
+  dns_namespace               = aws_service_discovery_private_dns_namespace.main
+  private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
+  bastion_security_group      = module.bastion.security_group
+  proget_stopped              = local.proget_stopped
+  proget_ami                  = local.proget_ami
+  proget_instance_type        = local.proget_instance_type
 }
 
 module "downloads" {
