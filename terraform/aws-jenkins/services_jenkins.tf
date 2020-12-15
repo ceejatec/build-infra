@@ -68,16 +68,17 @@ module "server_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    "amzn2"    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:20201211"
-    "centos7"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201214"
-    "centos8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:20201214"
-    "debian8"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:20201211"
-    "debian9"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:20201211"
-    "debian10" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:20201211"
-    "suse15"   = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:20201211"
-    "ubuntu16" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:20201211"
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:20201211"
-    "ubuntu20" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:20201211"
+    "amzn2"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:20201211"
+    "centos7"        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201214"
+    "centos8"        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:20201214"
+    "debian8"        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-build:20201214"
+    "debian8-alice"  = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian8-alice-build:20201215"
+    "debian9"        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian9-build:20201211"
+    "debian10"       = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-debian10-build:20201211"
+    "suse15"         = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-suse15-build:20201211"
+    "ubuntu16"       = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu16-build:20201211"
+    "ubuntu18"       = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:20201211"
+    "ubuntu20"       = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu20-build:20201211"
   }
 }
 
