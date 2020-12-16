@@ -55,3 +55,27 @@ resource "aws_security_group_rule" "efs" {
   source_security_group_id = aws_security_group.proget.id
   security_group_id = var.efs_security_group.id
 }
+
+resource "aws_security_group" "proget_lb" {
+  name        = "${var.prefix}-proget-lb"
+  description = "${var.prefix} Proget Load Balancer"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = var.private_subnets_cidr_blocks
+  }
+  egress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = var.private_subnets_cidr_blocks
+  }
+
+  tags = {
+    Name = "${var.prefix}-proget-lb"
+  }
+}

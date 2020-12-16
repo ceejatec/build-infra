@@ -8,7 +8,7 @@ Application load balancer for UI access
 
 EFS for JENKINS_HOME with an access point and mountpoints in both AZs, data encrypted at rest and in transit
 
-EFS for latestbuilds configured similarly
+EFS for latestbuilds, nexus, proget, downloads are configured similarly
 
 ECS cluster backed by autoscaling group of EC2 instances
 
@@ -22,7 +22,21 @@ Latestbuilds container (currently only http)
 
 Go proxy container
 
+Downloads container (downloads.build.couchbase.com, used by mobile for cbdep and jadk, etc.)
+
+Nexus container
+
+Proget: standalone EC2 with its own autoscaling group.
+
 A bastion instance with ssh access locked down to the creator's IP address.
+
+# Manually configured to make jenkins working on AWS
+
+Parameterized Remote Trigger Configurations in http://server.jenkins.couchbase.com/configure is modified so that build-from-manifest-new can trigger remote builds on mobile jenkins
+from http://mobile.jenkins.couchbase.com to http://mobile.jenkins.couchbase.com:8080
+
+Proget cloudmap registeration.  Terraform is not capable of registering EC2 in cloudmap.  We have to register it manually:
+  i.e. aws servicediscovery register-instance --service-id srv-pwxkawsumuqeaauu --attributes=AWS_ALIAS_DNS_NAME=internal-migration-proget-lb-2082981028.us-east-1.elb.amazonaws.com --instance-id i-04633bb3b75a11032
 
 # What's broken
 

@@ -18,6 +18,7 @@ resource "aws_autoscaling_group" "proget" {
   vpc_zone_identifier       = [var.private_subnets[0]]
   wait_for_capacity_timeout = "5m"
   launch_configuration      = aws_launch_configuration.proget.name
+  target_group_arns         = [aws_lb_target_group.proget.arn]
 
   health_check_grace_period = 300
   health_check_type         = "EC2"
