@@ -2,6 +2,76 @@
       <name>${cloud_name}</name>
       <templates>
 
+        <!-- clamav -->
+        <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
+          <templateName>clamav_4CPU_8GB</templateName>
+          <label>clamav</label>
+          <taskDefinitionOverride>${task_prefix}-WORKER-server-build-clamav</taskDefinitionOverride>
+          <defaultCapacityProvider>true</defaultCapacityProvider>
+          <remoteFSRoot>/home/couchbase/jenkins</remoteFSRoot>
+          <subnets>${subnets}</subnets>
+          <securityGroups>${security_groups}</securityGroups>
+          <defaultCapacityProvider>true</defaultCapacityProvider>
+          <assignPublicIp>false</assignPublicIp>
+          <taskrole></taskrole>
+          <executionRole>${execution_role}</executionRole>
+          <launchType>EC2</launchType>
+          <networkMode>bridge</networkMode>
+          <privileged>false</privileged>
+          <uniqueRemoteFSRoot>false</uniqueRemoteFSRoot>
+          <platformVersion>1.4.0</platformVersion>
+          <logDriver>awslogs</logDriver>
+          <logDriverOptions>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-group</name>
+              <value>${cloudwatch_log_group}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-region</name>
+              <value>${region}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-stream-prefix</name>
+              <value>${cloudwatch_log_prefix}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+          </logDriverOptions>
+        </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
+
+        <!-- ansible -->
+        <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
+          <templateName>ansible_2CPU_4GB</templateName>
+          <label>ansible</label>
+          <taskDefinitionOverride>${task_prefix}-WORKER-server-build-ansible</taskDefinitionOverride>
+          <defaultCapacityProvider>true</defaultCapacityProvider>
+          <remoteFSRoot>/home/couchbase/jenkins</remoteFSRoot>
+          <subnets>${subnets}</subnets>
+          <securityGroups>${security_groups}</securityGroups>
+          <defaultCapacityProvider>true</defaultCapacityProvider>
+          <assignPublicIp>false</assignPublicIp>
+          <taskrole></taskrole>
+          <executionRole>${execution_role}</executionRole>
+          <launchType>EC2</launchType>
+          <networkMode>bridge</networkMode>
+          <privileged>false</privileged>
+          <uniqueRemoteFSRoot>false</uniqueRemoteFSRoot>
+          <platformVersion>1.4.0</platformVersion>
+          <logDriver>awslogs</logDriver>
+          <logDriverOptions>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-group</name>
+              <value>${cloudwatch_log_group}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-region</name>
+              <value>${region}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-stream-prefix</name>
+              <value>${cloudwatch_log_prefix}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+          </logDriverOptions>
+        </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
+
         <!-- amazonlinux:2 -->
         <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
           <templateName>amzn2_4CPU_8GB</templateName>

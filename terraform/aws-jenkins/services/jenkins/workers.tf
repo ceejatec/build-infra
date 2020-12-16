@@ -17,8 +17,8 @@ resource "aws_ecs_task_definition" "worker" {
   execution_role_arn = var.ecs_role.arn
   # requires_compatibilities = ["FARGATE"]
 
-  cpu    = var.worker_cpu
-  memory = var.worker_memory
+  cpu    = each.key == "ansible" ? 1 : var.worker_cpu
+  memory = each.key == "ansible" ? 2048 : var.worker_memory
 
   network_mode = "awsvpc"
 }

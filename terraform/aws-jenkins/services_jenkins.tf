@@ -68,6 +68,10 @@ module "server_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
+    # tools
+    "clamav"         = "284614897128.dkr.ecr.us-east-1.amazonaws.com/clamav-slave:20201216"
+    "ansible"        = "couchbasebuild/ansible-slave:20180312"
+    # builders
     "amzn2"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:20201211"
     "centos7"        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201214"
     "centos8"        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos8-build:20201214"

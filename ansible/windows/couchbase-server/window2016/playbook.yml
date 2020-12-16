@@ -9,6 +9,17 @@
       include_role:
         name: ../../../common/roles/patch_via_gerrit
 
+    - name: Make temp dir
+      win_file:
+        path: C:\Temp
+        state: directory
+
+    - name: "Install OpenSSL"
+      win_chocolatey:
+        name: openssl
+        version: 1.1.1.800
+      tags: python3
+
     # Needed for WiX Toolset
     - name: "Enable .NET Framework 3.5"
       win_feature:
@@ -192,11 +203,13 @@
         name: "../../roles/vs2017"
         apply:
           tags:
-            visualstudio
+            - never
+            - visualstudio
       vars:
         PRODUCT: "{{ NODE_PRODUCT }}"
       tags:
-      - visualstudio
+        - never
+        - visualstudio
 
     # bcrypt is installed in this step, and needs visual studio to be present
     - name: "Install python3 modules for testrunner"
@@ -205,7 +218,12 @@
         beautifulsoup4==4.8.2 Geohash==1.0 python-geohash==0.8.5 deepdiff==4.3.2
         pyes==0.99.6 pytz==2019.3 requests==2.23.0 jsonpickle==1.3
         docker==4.2.0 decorator==4.4.2
-      tags: python3
+      environment:
+        LIB: C:\Program Files\OpenSSL-Win64\lib
+        INCLUDE: C:\Program Files\OpenSSL-Win64\include
+      tags:
+        - never
+        - testrunner
 
     # Do OpenSSH last so the service has the latest version of the path
     - name: Install OpenSSH (for Jenkins)
@@ -221,7 +239,7 @@
         scope: machine
         state: present
       tags:
-      - path
+        - path
 
     - name: Ensure OpenSSH executables are pathed
       win_path:
@@ -230,15 +248,27 @@
         scope: user
         state: present
       tags:
-      - path
+        - path
+
+    - name: Install AV tooling
+      win_chocolatey:
+        name: "{{ item }}"
+        allow_empty_checksums: "yes"
+      with_items:
+        - clamwin
+        - 7zip.commandline
+        - jdk8
+      tags:
+        - never
+        - av
 
     - name: Install aws cli
       win_chocolatey:
         name: awscli
         state: latest
       tags:
-      - never
-      - aws
+        - never
+        - aws
 
     - name: Configure profile synchronization
       include_role:
@@ -247,4 +277,4 @@
           tags:
             - profile
       tags:
-      - profile
+        - profile
