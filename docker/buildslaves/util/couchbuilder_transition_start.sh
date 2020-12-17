@@ -51,7 +51,7 @@ add_hostkeys() {
 export -f add_hostkeys
 
 # Handle invocations by the ECS plugin
-[[ "$1" == "-url" ]] && {
+[[ "$1" == "-url" || "$1" == "swarm" ]] && {
   mkdir -p /run/secrets
   echo "${profiledata_key}" > /run/secrets/profile_sync
 }
@@ -66,7 +66,7 @@ then
   # have to set permissions on directories here as we can only specify perms on files in the profile container
   start_cmd="mkdir -p ~/.ssh \
     && add_hostkeys \
-    && rsync --progress --archive --backup --executability --no-o --no-g -e \"ssh -p ${profile_port} -i /run/secrets/profile_sync\" couchbase@${profile_host}:${NODE_PRODUCT}/${NODE_CLASS}/linux/ /home/couchbase/ \
+    && rsync --progress --archive --backup --executability --no-o --no-g -e \"ssh -p ${profile_port} -i /run/secrets/profile_sync -o StrictHostKeyChecking=no\" couchbase@${profile_host}:${NODE_PRODUCT}/${NODE_CLASS}/linux/ /home/couchbase/ \
     && ([ -d ~/.ssh ] && chmod 00700 ~/.ssh) \
     && ([ -d ~/.gpg ] && chmod 00700 ~/.gpg)"
 

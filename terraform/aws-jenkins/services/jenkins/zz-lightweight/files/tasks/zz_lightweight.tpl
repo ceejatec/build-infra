@@ -30,6 +30,14 @@
       {
         "name": "JENKINS_SLAVE_EXECUTORS",
         "value": "10"
+      },
+      {
+        "name": "NODE_CLASS",
+        "value": "${node_class}"
+      },
+      {
+        "name": "NODE_PRODUCT",
+        "value": "${node_product}"
       }
     ],
     "secrets": [
@@ -40,6 +48,10 @@
       {
         "name": "jenkins_password",
         "valueFrom": "${jenkins_password}"
+      },
+      {
+        "name": "profiledata_key",
+        "valueFrom": "${profiledata_key_arn}"
       }
     ],
     "logConfiguration": {

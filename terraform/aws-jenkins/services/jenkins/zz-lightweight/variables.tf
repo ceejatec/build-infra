@@ -16,3 +16,4 @@ variable "context" {}
 variable "private_subnets" {}
 variable "jenkins_name" {}
 variable "master_url" {}
+variable "profiledata_key" {}

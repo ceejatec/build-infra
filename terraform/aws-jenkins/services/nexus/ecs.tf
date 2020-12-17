@@ -44,7 +44,7 @@ resource "aws_ecs_task_definition" "nexus" {
   network_mode = "awsvpc"
 
   volume {
-    name = "sonatype"
+    name = "nexus"
 
     efs_volume_configuration {
       file_system_id     = var.efs_file_system.id

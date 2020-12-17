@@ -87,6 +87,9 @@ resource "aws_ecs_task_definition" "zz_lightweight" {
     container_name        = var.hostname
     container_image       = var.image
     region                = var.region
+    profiledata_key_arn   = var.profiledata_key.arn
+    node_class            = "build"
+    node_product          = "couchbase-server"
   })
 
   execution_role_arn = var.ecs_role.arn

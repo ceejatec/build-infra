@@ -15,8 +15,8 @@
     ],
     "mountPoints": [
       {
-        "containerPath": "/sonatype",
-        "sourceVolume": "sonatype"
+        "containerPath": "/sonatype-work",
+        "sourceVolume": "nexus"
       }
     ],
     "logConfiguration": {

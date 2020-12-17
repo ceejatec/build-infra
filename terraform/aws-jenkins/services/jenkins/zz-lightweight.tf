@@ -5,7 +5,7 @@ module "zz_lightweight" {
     vpc_id = var.vpc_id
 
     ecs_role = var.ecs_role
-    image    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-zz-lightweight:20201211"
+    image    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-zz-lightweight:latest"
     region   = var.region
 
     cpu    = "512"
@@ -18,6 +18,7 @@ module "zz_lightweight" {
     domain        = var.domain
     stopped       = var.stopped
     context       = "EC2"
+    profiledata_key   = var.profiledata_key
 
     master_url    = "http://${var.hostname}.${var.subdomain}.${var.domain}:${var.ui_port}/"
 

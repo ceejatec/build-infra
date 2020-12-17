@@ -5,7 +5,7 @@ resource "aws_efs_access_point" "nexus" {
     gid = 1000
   }
   root_directory {
-    path = "/nexus"
+    path = "/nexus/sonatype-work/nexus"
     creation_info {
       owner_uid   = 1000
       owner_gid   = 1000
