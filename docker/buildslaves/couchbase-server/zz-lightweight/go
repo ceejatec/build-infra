@@ -11,10 +11,12 @@ cp -a cb-buildbot-config.sh build/cb-buildbot-config.sh
 docker build --build-arg CONTAINER_TAG_ARG=${IMAGE}:${TAG} . \
   -t ${IMAGE}:${TAG} \
   -t ${IMAGE}:latest \
+  -t ${IMAGE2}:${TAG} \
   -t ${IMAGE2}:latest
 if [ "$1" = "--publish" ]
 then
   docker push ${IMAGE}:$TAG
   docker push ${IMAGE}:latest
+  docker push ${IMAGE2}:$TAG
   docker push ${IMAGE2}:latest
 fi

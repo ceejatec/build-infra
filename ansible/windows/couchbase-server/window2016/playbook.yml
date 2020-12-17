@@ -262,6 +262,33 @@
         - never
         - av
 
+    - name: Copy diskpart script
+      win_copy:
+        src: files/{{ item }}
+        dest: C:\Temp\{{ item }}
+      with_items:
+        - aws_diskpart.cmd
+        - aws_diskpart.txt
+      tags:
+        - never
+        - aws
+
+    - name: Create diskpart scheduled task
+      win_scheduled_task:
+        name: Partition disk
+        description: Set up instance volumes in aws
+        logon_type: service_account
+        actions:
+        - path: cmd
+          arguments: /c start "" "C:\Temp\aws_diskpart.cmd"
+        enabled: yes
+        username: SYSTEM
+        triggers:
+          - type: boot
+      tags:
+        - never
+        - aws
+
     - name: Install aws cli
       win_chocolatey:
         name: awscli

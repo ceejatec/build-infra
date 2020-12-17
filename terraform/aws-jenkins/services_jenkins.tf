@@ -48,6 +48,7 @@ module "server_jenkins" {
   context       = "EC2"
 
   efs_security_group = aws_security_group.efs
+  bastion_security_group = module.bastion.security_group
 
   domain              = local.domain
   dns_namespace       = aws_service_discovery_private_dns_namespace.main
@@ -102,6 +103,7 @@ module "cv_jenkins" {
   context       = "EC2"
 
   efs_security_group = aws_security_group.efs
+  bastion_security_group = module.bastion.security_group
 
   domain              = local.domain
   dns_namespace       = aws_service_discovery_private_dns_namespace.main
@@ -142,6 +144,7 @@ module "analytics_jenkins" {
   context       = "EC2"
 
   efs_security_group = aws_security_group.efs
+  bastion_security_group = module.bastion.security_group
 
   domain              = local.domain
   dns_namespace       = aws_service_discovery_private_dns_namespace.main
@@ -183,6 +186,7 @@ module "mobile_jenkins" {
   context       = "EC2"
 
   efs_security_group = aws_security_group.efs
+  bastion_security_group = module.bastion.security_group
 
   domain              = local.domain
   dns_namespace       = aws_service_discovery_private_dns_namespace.main

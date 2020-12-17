@@ -5,7 +5,7 @@ module "zz_lightweight" {
     vpc_id = var.vpc_id
 
     ecs_role = var.ecs_role
-    image    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-zz-lightweight:latest"
+    image    = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-zz-lightweight:20201217"
     region   = var.region
 
     cpu    = "512"

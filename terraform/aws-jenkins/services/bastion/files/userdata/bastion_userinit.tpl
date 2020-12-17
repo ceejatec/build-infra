@@ -14,7 +14,7 @@ sudo su - root
 yum install -y amazon-efs-utils python3 python3-pip
 
 # install ansible for running packer - specifically 2.85 because filtering changes in higher versions break some of our playbooks
-pip3 install "ansible==2.8.5"
+pip3 install "ansible==2.8.5" pywinrm
 
 mkdir -p /efs/latestbuilds
 chown 1000:1000 /efs/latestbuilds

@@ -2,7 +2,7 @@ resource "aws_launch_configuration" "proget" {
   image_id             = var.proget_ami
   instance_type        = var.proget_instance_type
   key_name             = "${var.prefix}-robot"
-  iam_instance_profile = "${aws_iam_instance_profile.proget.id}"
+  iam_instance_profile = aws_iam_instance_profile.proget.id
   security_groups      = [aws_security_group.proget.id]
   lifecycle { create_before_destroy = false }
   user_data = templatefile("${path.module}/files/userdata/proget_userinit.tpl", {

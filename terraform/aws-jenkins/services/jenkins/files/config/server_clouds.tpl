@@ -40,7 +40,7 @@
         <!-- ansible -->
         <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
           <templateName>ansible_2CPU_4GB</templateName>
-          <label>ansible</label>
+          <label>ansible-slave-server</label>
           <taskDefinitionOverride>${task_prefix}-WORKER-server-build-ansible</taskDefinitionOverride>
           <defaultCapacityProvider>true</defaultCapacityProvider>
           <remoteFSRoot>/home/couchbase/jenkins</remoteFSRoot>
