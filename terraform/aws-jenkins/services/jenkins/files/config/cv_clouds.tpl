@@ -1,11 +1,46 @@
     <com.cloudbees.jenkins.plugins.amazonecs.ECSCloud plugin="amazon-ecs@1.37">
       <name>${cloud_name}</name>
       <templates>
-        <!-- ubuntu:18 -->
+        <!-- ubuntu:18 - small -->
         <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
           <templateName>ubuntu18_4CPU_8GB</templateName>
-          <label>ubuntu-18.04 master</label>
-          <taskDefinitionOverride>${task_prefix}-WORKER-cv-build-ubuntu18</taskDefinitionOverride>
+          <label>6.5.0 6.5.1 6.5.2 6.6.0 mad-hatter master small u18-docker-slave ubuntu-18.04 vulcan</label>
+          <taskDefinitionOverride>${task_prefix}-WORKER-cv-build-ubuntu18-small</taskDefinitionOverride>
+          <defaultCapacityProvider>true</defaultCapacityProvider>
+          <remoteFSRoot>/home/couchbase/jenkins</remoteFSRoot>
+          <subnets>${subnets}</subnets>
+          <securityGroups>${security_groups}</securityGroups>
+          <defaultCapacityProvider>true</defaultCapacityProvider>
+          <assignPublicIp>false</assignPublicIp>
+          <taskrole></taskrole>
+          <executionRole>${execution_role}</executionRole>
+          <launchType>EC2</launchType>
+          <networkMode>bridge</networkMode>
+          <privileged>false</privileged>
+          <uniqueRemoteFSRoot>false</uniqueRemoteFSRoot>
+          <platformVersion>1.4.0</platformVersion>
+          <logDriver>awslogs</logDriver>
+          <logDriverOptions>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-group</name>
+              <value>${cloudwatch_log_group}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-region</name>
+              <value>${region}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+            <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+              <name>awslogs-stream-prefix</name>
+              <value>${cloudwatch_log_prefix}</value>
+            </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate_-LogDriverOption>
+          </logDriverOptions>
+        </com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
+
+        <!-- ubuntu:18 - large -->
+        <com.cloudbees.jenkins.plugins.amazonecs.ECSTaskTemplate>
+          <templateName>ubuntu18_4CPU_8GB</templateName>
+          <label>6.5.0 6.5.1 6.5.2 6.6.0 mad-hatter master large u18-docker-slave ubuntu-18.04 vulcan</label>
+          <taskDefinitionOverride>${task_prefix}-WORKER-cv-build-ubuntu18-large</taskDefinitionOverride>
           <defaultCapacityProvider>true</defaultCapacityProvider>
           <remoteFSRoot>/home/couchbase/jenkins</remoteFSRoot>
           <subnets>${subnets}</subnets>

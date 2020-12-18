@@ -125,7 +125,8 @@ module "cv_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-cv:20201211"
+    "ubuntu18-small" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-cv:20201211"
+    "ubuntu18-large" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-cv:20201211"
   }
 }
 
