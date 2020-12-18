@@ -5,3 +5,5 @@ ec2_ip="`wget -q -O - http://169.254.169.254/latest/meta-data/local-ipv4 || die 
 
 #to-do: enhence this to use "aws servicediscovery get-service" to find service id
 aws servicediscovery register-instance --service-id srv-pwxkawsumuqeaauu --instance-id $ec2_id --attributes=AWS_INSTANCE_IPV4=$ec2_ip --region us-east-1
+
+mount -t efs -o iam,tls,accesspoint=${proget_accesspoint} ${filesystem}: /opt/proget

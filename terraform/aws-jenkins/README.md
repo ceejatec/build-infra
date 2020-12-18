@@ -35,9 +35,6 @@ A bastion instance with ssh access locked down to the creator's IP address.
 Parameterized Remote Trigger Configurations in http://server.jenkins.couchbase.com/configure is modified so that build-from-manifest-new can trigger remote builds on mobile jenkins
 from http://mobile.jenkins.couchbase.com to http://mobile.jenkins.couchbase.com:8080
 
-Proget cloudmap registeration.  Terraform is not capable of registering EC2 in cloudmap.  We have to register it manually:
-  i.e. aws servicediscovery register-instance --service-id srv-pwxkawsumuqeaauu --attributes=AWS_ALIAS_DNS_NAME=internal-migration-proget-lb-2082981028.us-east-1.elb.amazonaws.com --instance-id i-04633bb3b75a11032
-
 # What's broken
 
 The latestbuilds task is currently pointing at a basic nginx container. The EFS volume exists and is mounted in the container at /latestbuilds, but nothing is happening with it yet.

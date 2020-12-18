@@ -25,6 +25,9 @@ chown 1000:1000 /efs/downloads
 mkdir -p /efs/nexus
 chown 1000:1000 /efs/nexus
 
+mkdir -p /efs/proget
+chown 1000:1000 /efs/proget
+
 mkdir -p /efs/jenkins_home/{analytics,cv,server,mobile}
 chown 1000:1000 /efs/jenkins_home/{analytics,cv,server,mobile}
 
@@ -35,6 +38,7 @@ echo "mount -t efs -o iam,tls,accesspoint=${mobile_jenkins_accesspoint} ${filesy
 
 echo "mount -t efs -o iam,tls,accesspoint=${latestbuilds_accesspoint} ${filesystem}: /efs/latestbuilds" >> /root/mount.sh
 echo "mount -t efs -o iam,tls,accesspoint=${nexus_accesspoint} ${filesystem}: /efs/nexus" >> /root/mount.sh
+echo "mount -t efs -o iam,tls,accesspoint=${proget_accesspoint} ${filesystem}: /efs/proget" >> /root/mount.sh
 echo "mount -t efs -o iam,tls,accesspoint=${downloads_accesspoint} ${filesystem}: /efs/downloads" >> /root/mount.sh
 
 chmod a+x /root/mount.sh

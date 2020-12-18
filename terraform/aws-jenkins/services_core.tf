@@ -25,7 +25,7 @@ resource "aws_efs_file_system_policy" "main" {
     latestbuilds_principals            = "[\"${module.latestbuilds.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
 
     proget_access_point_arn            = module.proget.efs_access_point.arn
-    proget_principals                  = "[\"${module.proget.iam_role.arn}\",\"${module.proget.iam_role.arn}\"]"
+    proget_principals                  = "[\"${module.proget.iam_role.arn}\",\"${module.bastion.iam_role.arn}\"]"
   })
 }
 

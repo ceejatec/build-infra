@@ -97,6 +97,22 @@
         {
             "Effect": "Allow",
             "Principal": {
+                "AWS": ${proget_principals}
+            },
+            "Action": [
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientWrite"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "elasticfilesystem:AccessPointArn": "${proget_access_point_arn}"
+                }
+            },
+            "Resource": "${filesystem_arn}"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
                 "AWS": ${downloads_principals}
             },
             "Action": [

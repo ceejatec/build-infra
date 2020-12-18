@@ -6,6 +6,8 @@ resource "aws_launch_configuration" "proget" {
   security_groups      = [aws_security_group.proget.id]
   lifecycle { create_before_destroy = false }
   user_data = templatefile("${path.module}/files/userdata/proget_userinit.tpl", {
+    proget_accesspoint            = aws_efs_access_point.proget.id
+    filesystem                    = var.efs_file_system.id
   })
 }
 
