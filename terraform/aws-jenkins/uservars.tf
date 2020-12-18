@@ -52,7 +52,7 @@ locals {
   # proget
   proget_name            = "proget"
   proget_subdomain       = "build"
-  proget_ami             = "ami-0ebf1f6ace7f1f2e4"
+  proget_ami             = "ami-01accb82117ea785e"
   proget_instance_type   = "c5a.large"
 
   # downloads
