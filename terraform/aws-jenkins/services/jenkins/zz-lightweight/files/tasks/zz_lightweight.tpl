@@ -17,7 +17,7 @@
       },
       {
         "name": "JENKINS_SLAVE_LABELS",
-        "value": "zz-lightweight"
+        "value": "zz-lightweight ${jenkins_name}-zz-lightweight zz-${jenkins_name}-lightweight"
       },
       {
         "name": "JENKINS_SLAVE_NAME",

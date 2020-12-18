@@ -82,6 +82,7 @@ resource "aws_ecs_task_definition" "zz_lightweight" {
     cloudwatch_log_group  = aws_cloudwatch_log_group.zz_lightweight.name
     cloudwatch_log_prefix = "zz-lightweight"
     master_url            = var.master_url
+    jenkins_name          = var.jenkins_name
     jenkins_user          = aws_ssm_parameter.jenkins_user.arn
     jenkins_password      = aws_ssm_parameter.jenkins_password.arn
     container_name        = var.hostname

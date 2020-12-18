@@ -7,7 +7,7 @@ locals {
 
   # these will take precedence over stopped = false
   server_jenkins_stopped    = false
-  cv_jenkins_stopped        = true
+  cv_jenkins_stopped        = false
   mobile_jenkins_stopped    = false
   analytics_jenkins_stopped = true
 
@@ -24,7 +24,7 @@ locals {
   bastion_instance_type = "t2.large"
 
   ec2_instance_type = "c5ad.4xlarge"
-  ec2_max_instances = 4
+  ec2_max_instances = 16
 
   # mobile jenkins
   mobile_context         = "EC2"
