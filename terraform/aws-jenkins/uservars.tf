@@ -6,8 +6,8 @@ locals {
   proget_stopped  = false  # stops proget ec2
 
   # these will take precedence over stopped = false
-  server_jenkins_stopped    = false
-  cv_jenkins_stopped        = false
+  server_jenkins_stopped    = true
+  cv_jenkins_stopped        = true
   mobile_jenkins_stopped    = false
   analytics_jenkins_stopped = true
 
