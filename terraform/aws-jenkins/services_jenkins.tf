@@ -132,7 +132,7 @@ module "cv_jenkins" {
 
 module "analytics_jenkins" {
   source  = "./services/jenkins"
-  stopped = true #local.stopped || local.jenkins_stopped || local.analytics_jenkins_stopped
+  stopped = local.stopped || local.jenkins_stopped || local.analytics_jenkins_stopped
   lb_stopped = local.lbs_stopped # danger - when you bring it back up it'll have a different fqdn
   prefix  = local.name
 
@@ -167,8 +167,7 @@ module "analytics_jenkins" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
 
   images = {
-    # not quite yet known
-    #"ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-ubuntu18-build:latest"
+    "ubuntu18" = "284614897128.dkr.ecr.us-east-1.amazonaws.com/analytics-ubuntu18-cv:latest"
   }
 }
 
