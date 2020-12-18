@@ -71,7 +71,7 @@ module "server_jenkins" {
   images = {
     # tools
     "clamav"         = "284614897128.dkr.ecr.us-east-1.amazonaws.com/clamav-slave:20201216"
-    "ansible"        = "couchbasebuild/ansible-slave:20180312"
+    "ansible"        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/ansible-slave:20201218"
     # builders
     "amzn2"          = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-amzn2-build:20201211"
     "centos7"        = "284614897128.dkr.ecr.us-east-1.amazonaws.com/server-centos7-build:20201214"
