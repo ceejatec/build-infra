@@ -15,7 +15,7 @@ resource "aws_ssm_parameter" "couchbase_server_shared_gitconfig" {
   value = file("~/aws-ssh/couchbase-server/shared/.gitconfig")
 }
 
-# CV
+# Linux CV
 resource "aws_ssm_parameter" "couchbase_server_cv_linux_gitconfig" {
   name  = "${var.prefix}-couchbase_server_cv_linux_gitconfig"
   type  = "SecureString"
@@ -67,7 +67,7 @@ resource "aws_ssm_parameter" "couchbase_server_cv_linux_ssh_buildbot_id_dsa" {
   value = file("~/aws-ssh/couchbase-server/cv/linux/.ssh/buildbot_id_dsa")
 }
 
-# Build
+# Linux Build
 resource "aws_ssm_parameter" "couchbase_server_build_linux_gitconfig" {
   name  = "${var.prefix}-couchbase_server_build_linux_gitconfig"
   type  = "SecureString"
@@ -130,7 +130,7 @@ resource "aws_ssm_parameter" "couchbase_server_build_linux_ssh_patch_via_gerrit_
 }
 
 
-# Windows
+# Windows Build
 resource "aws_ssm_parameter" "couchbase_server_windows_config" {
   name  = "${var.prefix}-couchbase_server_windows_config"
   type  = "SecureString"
@@ -151,6 +151,68 @@ resource "aws_ssm_parameter" "couchbase_server_windows_known_hosts" {
   type  = "SecureString"
   tier  = "Advanced"
   value = file("~/aws-ssh/couchbase-server/windows/known_hosts")
+}
+
+# Windows CV
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_gitconfig" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_gitconfig"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.gitconfig")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_buildbot_id_dsa" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_buildbot_id_dsa"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/buildbot_id_dsa")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_config" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_config"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/config")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_config_org" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_config_org"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/config.org")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_environment" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_environment"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/environment")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_id_ns_codereview" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_id_ns_codereview"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/id_ns-codereview")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_id_rsa" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_id_rsa"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/id_rsa")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_known_hosts" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_known_hosts"
+  type  = "SecureString"
+  tier  = "Advanced"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/known_hosts")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_ns_buildbot_rsa" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_ns_buildbot_rsa"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/ns-buildbot.rsa")
+}
+
+resource "aws_ssm_parameter" "couchbase_server_cv_windows_ssh_patch_via_gerrit_ini" {
+  name  = "${var.prefix}-couchbase_server_cv_windows_ssh_patch_via_gerrit_ini"
+  type  = "SecureString"
+  value = file("~/aws-ssh/couchbase-server/cv/windows/.ssh/patch_via_gerrit.ini")
 }
 
 # CLIENT KEY

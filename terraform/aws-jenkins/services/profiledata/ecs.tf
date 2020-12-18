@@ -79,6 +79,17 @@ resource "aws_ecs_task_definition" "profiledata" {
     couchbase_server_cv_linux_ssh_id_buildbot   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_id_buildbot.arn
     couchbase_server_cv_linux_ssh_environment   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_environment.arn
     couchbase_server_cv_linux_ssh_buildbot_id_dsa   = aws_ssm_parameter.couchbase_server_cv_linux_ssh_buildbot_id_dsa.arn
+    # CV Windows
+    couchbase_server_cv_windows_gitconfig            = aws_ssm_parameter.couchbase_server_cv_windows_gitconfig.arn
+    couchbase_server_cv_windows_ssh_known_hosts            = aws_ssm_parameter.couchbase_server_cv_windows_ssh_known_hosts.arn
+    couchbase_server_cv_windows_ssh_buildbot_id_dsa  = aws_ssm_parameter.couchbase_server_cv_windows_ssh_buildbot_id_dsa.arn
+    couchbase_server_cv_windows_ssh_config               = aws_ssm_parameter.couchbase_server_cv_windows_ssh_config.arn
+    couchbase_server_cv_windows_ssh_config_org           = aws_ssm_parameter.couchbase_server_cv_windows_ssh_config_org.arn
+    couchbase_server_cv_windows_ssh_environment          = aws_ssm_parameter.couchbase_server_cv_windows_ssh_environment.arn
+    couchbase_server_cv_windows_ssh_id_ns_codereview     = aws_ssm_parameter.couchbase_server_cv_windows_ssh_id_ns_codereview.arn
+    couchbase_server_cv_windows_ssh_id_rsa               = aws_ssm_parameter.couchbase_server_cv_windows_ssh_id_rsa.arn
+    couchbase_server_cv_windows_ssh_ns_buildbot_rsa      = aws_ssm_parameter.couchbase_server_cv_windows_ssh_ns_buildbot_rsa.arn
+    couchbase_server_cv_windows_ssh_patch_via_gerrit_ini = aws_ssm_parameter.couchbase_server_cv_windows_ssh_patch_via_gerrit_ini.arn
   })
   execution_role_arn = var.ecs_iam_role.arn
   task_role_arn      = aws_iam_role.profiledata.arn

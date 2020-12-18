@@ -165,6 +165,47 @@
       },
 
       {
+        "name": "couchbase_server_cv_windows_gitconfig",
+        "valueFrom": "${couchbase_server_cv_windows_gitconfig}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_buildbot_id_dsa",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_buildbot_id_dsa}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_config",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_config}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_config_org",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_config_org}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_environment",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_environment}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_id_ns_codereview",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_id_ns_codereview}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_id_rsa",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_id_rsa}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_known_hosts",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_known_hosts}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_ns_buildbot_rsa",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_ns_buildbot_rsa}"
+      },
+      {
+        "name": "couchbase_server_cv_windows_ssh_patch_via_gerrit_ini",
+        "valueFrom": "${couchbase_server_cv_windows_ssh_patch_via_gerrit_ini}"
+      },
+
+      {
         "name": "couchbase_server_windows_config",
         "valueFrom": "${couchbase_server_windows_config}"
       },

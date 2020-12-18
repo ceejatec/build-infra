@@ -46,7 +46,7 @@ resource "aws_security_group" "ec2_worker" {
     from_port       = 3389
     to_port         = 3389
     protocol        = "TCP"
-    security_groups = [aws_security_group.jenkins_master.id]
+    security_groups = [var.bastion_security_group.id]
   }
   ingress {
     description     = "WinRM"

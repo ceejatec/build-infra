@@ -72,6 +72,17 @@ resource "aws_iam_policy" "profiledata_ssm" {
           "${aws_ssm_parameter.couchbase_server_cv_linux_ssh_environment.arn}",
           "${aws_ssm_parameter.couchbase_server_cv_linux_ssh_buildbot_id_dsa.arn}",
 
+          "${aws_ssm_parameter.couchbase_server_cv_windows_gitconfig.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_buildbot_id_dsa.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_config.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_config_org.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_environment.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_id_ns_codereview.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_id_rsa.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_known_hosts.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_ns_buildbot_rsa.arn}",
+          "${aws_ssm_parameter.couchbase_server_cv_windows_ssh_patch_via_gerrit_ini.arn}",
+
           "${aws_ssm_parameter.couchbase_server_windows_config.arn}",
           "${aws_ssm_parameter.couchbase_server_windows_authorized_keys.arn}",
           "${aws_ssm_parameter.couchbase_server_windows_environment.arn}",
