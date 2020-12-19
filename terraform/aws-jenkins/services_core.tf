@@ -194,7 +194,7 @@ module "proget" {
   dns_namespace               = aws_service_discovery_private_dns_namespace.main
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
   bastion_security_group      = module.bastion.security_group
-  proget_stopped              = local.proget_stopped
+  stopped                     = local.stopped
   proget_ami                  = local.proget_ami
   proget_instance_type        = local.proget_instance_type
 }

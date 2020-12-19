@@ -14,8 +14,8 @@ resource "aws_launch_configuration" "proget" {
 # proget autoscaling group
 resource "aws_autoscaling_group" "proget" {
   name     = "${var.prefix}-proget-${aws_launch_configuration.proget.name}"
-  max_size = var.proget_stopped ? 0 : 1
-  min_size = var.proget_stopped ? 0 : 1
+  max_size = var.stopped ? 0 : 1
+  min_size = var.stopped ? 0 : 1
 
   # availability_zones = [data.aws_availability_zones.available.names[1]]
   default_cooldown = 120

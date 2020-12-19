@@ -5,7 +5,7 @@ variable "private_subnets" {}
 variable "efs_file_system" {}
 variable "proget_ami" {}
 variable "proget_instance_type" {}
-variable "proget_stopped" {}
+variable "stopped" {}
 variable "region" {}
 variable "dns_namespace" {}
 variable "efs_security_group" {}
