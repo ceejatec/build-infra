@@ -15,6 +15,8 @@ aws servicediscovery register-instance --service-id $service_id --instance-id $i
 mount -t efs -o iam,tls,accesspoint=${proget_accesspoint} ${filesystem}: /opt/proget
 
 cd /opt/proget
+systemctl enable docker
+systemctl start docker
 docker network create proget
 docker run --name proget-sql -e 'ACCEPT_EULA=Y' -e "MSSQL_SA_PASSWORD=`cat mssql-pass.txt`" -e 'MSSQL_PID=Express' -v /opt/proget/mssql:/var/opt/mssql --net=proget --restart=unless-stopped -d mcr.microsoft.com/mssql/server:2017-latest
 docker run -d -v proget-packages:/var/proget/packages -p 80:80 --net=proget --name=proget -e PROGET_DB_TYPE=SqlServer -e PROGET_DATABASE="Data Source=proget-sql; Initial Catalog=ProGet; User ID=sa; Password=`cat mssql-pass.txt`" --restart=unless-stopped -v /opt/proget:/buildteam/proget inedo/proget:latest
