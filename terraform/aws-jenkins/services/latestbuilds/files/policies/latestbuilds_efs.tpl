@@ -13,6 +13,17 @@
                     "elasticfilesystem:AccessPointArn": "${access_point_arn}"
                 }
             }
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:GetParameter",
+                "ssm:GetParameters",
+                "secretsmanager:GetSecretValue"
+            ],
+            "Resource": [
+                "${latestbuilds_htpasswd}"
+            ]
         }
     ]
 }

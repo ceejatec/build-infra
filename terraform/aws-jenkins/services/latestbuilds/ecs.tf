@@ -16,6 +16,12 @@ resource "aws_ecs_service" "latestbuilds" {
     security_groups  = [aws_security_group.latestbuilds.id]
   }
 
+  load_balancer {
+    target_group_arn = aws_lb_target_group.latestbuilds.arn
+    container_name   = var.hostname
+    container_port   = var.ui_port
+  }
+
   ordered_placement_strategy {
     type  = "binpack"
     field = "cpu"
@@ -31,9 +37,11 @@ resource "aws_ecs_task_definition" "latestbuilds" {
     container_name        = var.hostname
     container_image       = var.image
     region                = var.region
+
+    latestbuilds_htpasswd = aws_ssm_parameter.latestbuilds_htpasswd.arn
   })
 
-  execution_role_arn = var.ecs_execution_role.arn #ecs
+  execution_role_arn = var.ecs_iam_role.arn
   task_role_arn      = aws_iam_role.latestbuilds.arn
 
   requires_compatibilities = ["FARGATE"]

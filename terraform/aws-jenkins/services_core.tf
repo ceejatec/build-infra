@@ -110,6 +110,9 @@ module "latestbuilds" {
   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
   ecs_cluster                 = aws_ecs_cluster.main
   bastion_security_group      = module.bastion.security_group
+  lb_stopped                  = local.lbs_stopped
+  public_subnets              = module.vpc.public_subnets
+  ecs_iam_role                = aws_iam_role.ecs
 }
 
 module "profiledata" {

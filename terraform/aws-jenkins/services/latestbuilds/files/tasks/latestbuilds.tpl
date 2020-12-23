@@ -25,6 +25,12 @@
           "readOnly": false
       }
     ],
+    "secrets": [
+      {
+        "name": "htpasswd",
+        "valueFrom": "${latestbuilds_htpasswd}"
+      }
+    ],
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {

@@ -17,3 +17,14 @@ variable "context" {}
 variable "stopped" {}
 variable "efs_security_group" {}
 variable "bastion_security_group" {}
+
+variable "ui_port" {
+  type    = number
+  default = 80
+}
+variable "lb_stopped" {}
+
+variable "public_subnets" {
+    type = list(string)
+}
+variable "ecs_iam_role" {}

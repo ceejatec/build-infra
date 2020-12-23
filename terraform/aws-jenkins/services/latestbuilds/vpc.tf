@@ -16,7 +16,7 @@ resource "aws_security_group" "latestbuilds" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    security_groups = [var.bastion_security_group.id]
+    security_groups = [var.bastion_security_group.id, aws_security_group.ui_load_balancer.id]
   }
 
   ingress {
@@ -54,4 +54,25 @@ resource "aws_security_group_rule" "efs" {
   protocol          = "tcp"
   source_security_group_id = aws_security_group.latestbuilds.id
   security_group_id = var.efs_security_group.id
+}
+
+
+resource "aws_security_group" "ui_load_balancer" {
+  name        = "${var.prefix}-${var.hostname}-ui-load-balancer"
+  description = "ALB"
+  vpc_id      = var.vpc_id
+
+  tags = {
+    Name = "${var.prefix}-${var.hostname}-ui-load-balancer"
+  }
+}
+
+
+resource "aws_security_group_rule" "ui_lb_egress" {
+  type                     = "egress"
+  from_port                = 0
+  to_port                  = 0
+  protocol                 = "-1"
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ui_load_balancer.id
 }
