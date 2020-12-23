@@ -21,4 +21,9 @@ resource "aws_ecs_task_definition" "worker" {
   memory = each.key == "ansible" ? 2048 : each.key == "ubuntu18-large" ? 24000 : var.worker_memory
 
   network_mode = "awsvpc"
+
+  volume {
+    name = "dockersock"
+    host_path = "/var/run/docker.sock"
+  }
 }

@@ -1,6 +1,6 @@
 # Docker container for Ubuntu 18.04 analytics.jenkins agent
 
-FROM couchbasebuild/server-ubuntu18-build:20201209
+FROM couchbasebuild/server-ubuntu18-build:20201216
 LABEL maintainer="build-team@couchbase.com"
 
 # ENV vars for profile data retrieval - analytics is basically CV
@@ -41,7 +41,9 @@ RUN set -x \
   && rm -rf deploy
 
 # Add couchbase user to "docker" group on host (999)
+# Also include GID 996 for ECS
 RUN groupadd -g 999 docker && usermod -a -G docker couchbase
+RUN groupadd -g 996 dockerecs && usermod -a -G dockerecs couchbase
 
 # Keep this stuff at the end, because the ARG declaration breaks Docker build caching
 ARG CONTAINER_TAG_ARG

@@ -8,7 +8,7 @@ locals {
   server_jenkins_stopped    = true
   cv_jenkins_stopped        = true
   mobile_jenkins_stopped    = true
-  analytics_jenkins_stopped = true
+  analytics_jenkins_stopped = false
 
   ssh_key_path = "/tmp/aws-migration.pem" # key will be saved here on `terraform apply` if the file doesn't exist
 

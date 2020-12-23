@@ -30,6 +30,12 @@
         "name": "profiledata_key",
         "valueFrom": "${profiledata_key_arn}"
       }
+    ],
+    "mountPoints": [
+      {
+        "sourceVolume": "dockersock",
+        "containerPath": "/var/run/docker.sock"
+      }
     ]
   }
 ]
