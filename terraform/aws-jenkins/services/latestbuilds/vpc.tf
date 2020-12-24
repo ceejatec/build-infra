@@ -13,8 +13,8 @@ resource "aws_security_group" "latestbuilds" {
 
   ingress {
     description = "HTTP"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 90
+    to_port     = 90
     protocol    = "tcp"
     security_groups = [var.bastion_security_group.id, aws_security_group.ui_load_balancer.id]
   }

@@ -1,3 +1,9 @@
 #!/bin/bash
 
-docker build . -t 284614897128.dkr.ecr.us-east-1.amazonaws.com/latestbuilds
+IMAGE=284614897128.dkr.ecr.us-east-1.amazonaws.com/latestbuilds
+docker build . -t ${IMAGE}
+
+if [ "$1" == "--publish" ]; then
+    docker push ${IMAGE}:latest
+fi
+

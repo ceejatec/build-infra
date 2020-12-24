@@ -19,7 +19,7 @@ resource "aws_ecs_service" "latestbuilds" {
   load_balancer {
     target_group_arn = aws_lb_target_group.latestbuilds.arn
     container_name   = var.hostname
-    container_port   = var.ui_port
+    container_port   = 90
   }
 
   ordered_placement_strategy {

@@ -1,6 +1,6 @@
 resource "aws_lb_target_group" "latestbuilds" {
   name        = "${var.prefix}-${var.hostname}-web"
-  port        = 80
+  port        = 90
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id

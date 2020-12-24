@@ -11,6 +11,10 @@
       {
         "containerPort": 80,
         "hostPort": 80
+      },
+      {
+        "containerPort": 90,
+        "hostPort": 90
       }
     ],
     "mountPoints": [
