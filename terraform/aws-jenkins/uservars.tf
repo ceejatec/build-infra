@@ -5,9 +5,9 @@ locals {
   jenkins_stopped = false  # stops all jenkins masters
 
   # these will take precedence over stopped = false
-  server_jenkins_stopped    = true
-  cv_jenkins_stopped        = true
-  mobile_jenkins_stopped    = true
+  server_jenkins_stopped    = false
+  cv_jenkins_stopped        = false
+  mobile_jenkins_stopped    = false
   analytics_jenkins_stopped = false
 
   ssh_key_path = "/tmp/aws-migration.pem" # key will be saved here on `terraform apply` if the file doesn't exist
