@@ -9,7 +9,6 @@ mkdir -p build
 cp -a ../../util/couchbuilder_transition_start.sh build/couchbuilder_start.sh
 cp -a ../../util/swarm*.properties build
 cp -a ../../util/healthcheck.sh build
-cp -a ../../util/hooks/buildx.sh build
 cp -a ../cv-hook.sh build
 cp ../gitconfig ./build/
 cp ../ssh_environment ./build/

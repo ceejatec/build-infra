@@ -7,8 +7,6 @@ ARG DOCKER_VERSION
 ARG VALGRIND_VERSION
 ARG JYTHON_VERSION
 
-COPY --from=docker/buildx-bin:latest /buildx /usr/libexec/docker/cli-plugins/docker-buildx
-
 # ENV vars for profile data retrieval
 ENV NODE_CLASS=cv
 ENV NODE_PRODUCT=couchbase-server
@@ -96,9 +94,6 @@ RUN set -x \
 
 # lsof and netstat for debugging purposes
 RUN yum install -y lsof net-tools && yum clean all
-
-# Add startup hook to enable buildx
-COPY build/buildx.sh /usr/sbin/couchhook.d/
 
 # Enable additional hook for ccache
 COPY build/cv-hook.sh /usr/sbin/couchhook.d/
